@@ -12,6 +12,7 @@ from PathManager.StockPathManager import GetMergedFolder, GetAdvanceFilterFolder
     GetRawDataFolder
 import os
 import pandas as pd
+from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistance import CAdvanceFilter_ShortDistance
 
 def __advanceFilter(filter_):
     srcFolder = GetMergedFolder()
@@ -77,11 +78,20 @@ def MergeAllResult():
         res.to_excel(fileName,encoding="utf_8_sig", index=False)
         
 def DoAdvanceFilterMain():
-    advanceFilterByFilter()
-    advanceFilterAll()
-        
+    Test()
+#     advanceFilterByFilter()
+#     advanceFilterAll()
+    
+
+def Test():
+    filter1 = CAdvanceFilter_ShortDistance(1.0)
+    filter2 = CAdvanceFilter_RSI_DunHua(threshold_max=80)
+    __advanceFilter(filter1)
+    __advanceFilter(filter2)
+
 if __name__ == '__main__':
-    DoAdvanceFilterMain()
-    MergeAllResult()
+    #DoAdvanceFilterMain()
+    #MergeAllResult()
+    Test()
     
     

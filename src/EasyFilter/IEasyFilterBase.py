@@ -14,3 +14,7 @@ class IEasyFilterBase(object):
         
     def Filter(self):
         return False
+
+if __name__ == '__main__':
+    base = IEasyFilterBase()
+    print(base.filterName)
