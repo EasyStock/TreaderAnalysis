@@ -13,6 +13,7 @@ from PathManager.StockPathManager import GetMergedFolder, GetAdvanceFilterFolder
 import os
 import pandas as pd
 from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistance import CAdvanceFilter_ShortDistance
+from StockFilter.AdvanceFilter.StockAdvanceFilter_MidDistance import CAdvanceFilter_MidDistance
 
 def __advanceFilter(filter_):
     srcFolder = GetMergedFolder()
@@ -86,12 +87,15 @@ def DoAdvanceFilterMain():
 def Test():
     filter1 = CAdvanceFilter_ShortDistance(1.0)
     filter2 = CAdvanceFilter_RSI_DunHua(threshold_max=80)
+    filter3 = CAdvanceFilter_MidDistance(1.0)
     __advanceFilter(filter1)
     __advanceFilter(filter2)
 
 if __name__ == '__main__':
     #DoAdvanceFilterMain()
     #MergeAllResult()
-    Test()
+    #Test()
+    filter3 = CAdvanceFilter_MidDistance(1.0)
+    __advanceFilter(filter3)
     
     

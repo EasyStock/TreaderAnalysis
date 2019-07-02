@@ -8,7 +8,7 @@ import pandas as pd
 from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
 from StockDataItem.StockItemDef import stock_Days, stock_Date,\
     stock_Name, stock_DISTANCE_MA_SHORT, stock_ZhangDieFu, stock_Volumn_Ratio,\
-    stock_DistanceMA60, stock_DistanceMA5, stock_ClosePrice
+    stock_DistanceMA60, stock_DistanceMA5, stock_ClosePrice, stock_CLOSE_TO_BOLLUP
 
 class CAdvanceFilter_ShortDistance(IAdvanceFilterBase):
 
@@ -33,7 +33,8 @@ class CAdvanceFilter_ShortDistance(IAdvanceFilterBase):
             float(df.iloc[-3][stock_DISTANCE_MA_SHORT])
             float(df.iloc[-3][stock_ZhangDieFu])
             float(df.iloc[-3][stock_Volumn_Ratio])
-            float(df.iloc[-3][stock_DistanceMA60]) 
+            float(df.iloc[-3][stock_DistanceMA60])
+            float(df.iloc[-3][stock_CLOSE_TO_BOLLUP])
         except:
             return False
     
@@ -44,7 +45,7 @@ class CAdvanceFilter_ShortDistance(IAdvanceFilterBase):
         if not self.ValidateData(df):
             return (False,)
         
-        df1 = pd.DataFrame(df, columns=(stock_Date,stock_DISTANCE_MA_SHORT,stock_ZhangDieFu,stock_Volumn_Ratio,stock_DistanceMA60,stock_DistanceMA5),copy = True)        
+        df1 = pd.DataFrame(df, columns=(stock_Date,stock_DISTANCE_MA_SHORT,stock_ZhangDieFu,stock_Volumn_Ratio,stock_DistanceMA60,stock_DistanceMA5,stock_CLOSE_TO_BOLLUP),copy = True)        
         count = 0
         rows = df1.shape[0]
         for i in range(2, rows):
@@ -65,6 +66,7 @@ class CAdvanceFilter_ShortDistance(IAdvanceFilterBase):
             ret['最后一天量比'] = float(df1.iloc[-1][stock_Volumn_Ratio])
             ret['到MA60的距离'] = float(df1.iloc[-1][stock_DistanceMA60])
             ret['到MA5的距离'] = float(df1.iloc[-1][stock_DistanceMA5])
+            ret['到BOLL上轨距离'] = float(df1.iloc[-1][stock_CLOSE_TO_BOLLUP])
             key = '%s收盘价'%(df.iloc[-1][stock_Date])
             ret[key] = df.iloc[-1][stock_ClosePrice]
             return (True,ret)
