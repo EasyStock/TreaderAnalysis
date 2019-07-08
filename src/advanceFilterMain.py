@@ -5,7 +5,7 @@ Created on Jun 16, 2019
 '''
 from StockFilter.AdvanceFilter.StockAdvanceFilter_20MA_DOWN_CRASS_60MA import CAdvanceFilter_20MA_Down_Cross_60MA
 from StockFilter.AdvanceFilter.StockAdvanceFilter_RSI_DunHua import CAdvanceFilter_RSI_DunHua
-from StockFilter.AdvanceFilter.StockAdvanceFilter_BOLL_WIDTH import CAdvanceFilter_BOOL_WIDTH
+from StockFilter.AdvanceFilter.StockAdvanceFilter_BOLL_WIDTH import CAdvanceFilter_BOLL_WIDTH
 from StockFilter.AdvanceFilter.StockAdvanceFilter_Red3 import CAdvanceFilter_Red3
 from StockFilter.FilterMgr.StockAdvanceFilterMgr import CAdvanceFilterMgr
 from PathManager.StockPathManager import GetMergedFolder, GetAdvanceFilterFolder,\
@@ -31,7 +31,7 @@ def advanceFilterAll():
     filter0 = CAdvanceFilter_20MA_Down_Cross_60MA()
     filter1 = CAdvanceFilter_RSI_DunHua(threshold_max=78)
     filter2 = CAdvanceFilter_RSI_DunHua(threshold_min=22)
-    filter3 = CAdvanceFilter_BOOL_WIDTH()
+    filter3 = CAdvanceFilter_BOLL_WIDTH()
     filter4 = CAdvanceFilter_Red3()
     
     filters = (filter0, filter1, filter2, filter3,filter4)
@@ -40,7 +40,7 @@ def advanceFilterAll():
 
 def advanceFilterByFilter():
     filter1 = CAdvanceFilter_RSI_DunHua(threshold_max=78)
-    filter2 = CAdvanceFilter_BOOL_WIDTH()
+    filter2 = CAdvanceFilter_BOLL_WIDTH()
     filter3 = CAdvanceFilter_Red3()
     filter4 = CAdvanceFilter_RSI_DunHua(threshold_min=45,threshold_max=82)
     
@@ -94,8 +94,8 @@ def Test():
 if __name__ == '__main__':
     #DoAdvanceFilterMain()
     #MergeAllResult()
-    #Test()
-    filter3 = CAdvanceFilter_MidDistance(1.0)
-    __advanceFilter(filter3)
+    Test()
+#     filter3 = CAdvanceFilter_MidDistance(1.0)
+#     __advanceFilter(filter3)
     
     

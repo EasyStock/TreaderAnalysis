@@ -9,7 +9,7 @@ from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
 from StockDataItem.StockItemDef import stock_Days, stock_Date,\
     stock_BOLL_Band_width, stock_BOLLMid, stock_Name
 
-class CAdvanceFilter_BOOL_WIDTH(IAdvanceFilterBase):
+class CAdvanceFilter_BOLL_WIDTH(IAdvanceFilterBase):
 
     def __init__(self):
         '''
@@ -62,7 +62,7 @@ class CAdvanceFilter_BOOL_WIDTH(IAdvanceFilterBase):
             flag = 'DOWN'
         else:
             flag = 'UnKnown'
-        if count >=2 and flag == 'UP':
+        if count >=1 and flag == 'UP':
             ret = {}
             ret["0日期"] = df.iloc[-1][stock_Date]
             ret["1股票简称"] = df.iloc[-1][stock_Name]
