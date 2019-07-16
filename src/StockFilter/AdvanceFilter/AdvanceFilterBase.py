@@ -15,4 +15,5 @@ class IAdvanceFilterBase(object):
     def FilterBy(self, df):
         return (False,)
         
-        
+    def FilterEveryDayBy(self, df):
+        return (False,)

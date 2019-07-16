@@ -25,6 +25,14 @@ stock_MA60 = u'60MA'
 stock_MA120 = u'120MA'
 stock_MA240 = u'240MA'
 
+stock_MA5_ACC = u'5MA'
+stock_MA10 = u'10MA'
+stock_MA20 = u'20MA'
+stock_MA30 = u'30MA'
+stock_MA60 = u'60MA'
+stock_MA120 = u'120MA'
+stock_MA240 = u'240MA'
+
 stock_MACD = u'MACD'
 
 stock_BOLLUp = u'BOLL上轨'

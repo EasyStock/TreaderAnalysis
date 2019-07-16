@@ -16,6 +16,10 @@ class CAdvanceFilterMgr(object):
     def FilterFile(self, srcFileName, filter_):
         df = pd.read_excel(srcFileName, index_col = None, encoding='utf_8_sig')
         return filter_.FilterBy(df)
+    
+    def FilterFileEveryDay(self, srcFileName, filter_):
+        df = pd.read_excel(srcFileName, index_col = None, encoding='utf_8_sig')
+        return filter_.FilterEveryDayBy(df)
             
     def FilterFolder(self,folder,filter_, outFolder):
         filenames=os.listdir(folder)
@@ -30,11 +34,24 @@ class CAdvanceFilterMgr(object):
                 res[1][stock_ID] = stockID
                 ret.append(res[1])
                 print(stockID, srcFileName)
-        
+
         if len(ret) > 0:
             df = pd.DataFrame(ret)
             fileName = u'%s/%s_%s.xlsx' %(outFolder, filter_.filterName,date.today())
             df.to_excel(fileName,encoding="utf_8_sig", index=False)
+
+    def FilterFolderEveryDay(self,folder,filter_, outFolder):
+        filenames=os.listdir(folder)
+        for xlsxFile in filenames:
+            if xlsxFile.find('.xlsx') == -1:
+                continue
+            stockID = xlsxFile[:xlsxFile.rfind('.')]
+            srcFileName = os.path.join(folder,xlsxFile)
+            res = self.FilterFileEveryDay(srcFileName, filter_)
+            if len(res) > 0:
+                df = pd.DataFrame(res)
+                fileName = u'%s/%s.xlsx' %(outFolder, stockID)
+                df.to_excel(fileName,encoding="utf_8_sig", index=False)
         
     def FilterFileByFilter(self,srcFileName, filters):
         df = pd.read_excel(srcFileName, index_col = None, encoding='utf_8_sig')

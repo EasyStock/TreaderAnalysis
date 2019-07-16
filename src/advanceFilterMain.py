@@ -14,12 +14,19 @@ import os
 import pandas as pd
 from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistance import CAdvanceFilter_ShortDistance
 from StockFilter.AdvanceFilter.StockAdvanceFilter_MidDistance import CAdvanceFilter_MidDistance
+from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistanceEx import CAdvanceFilter_ShortDistanceEx
 
 def __advanceFilter(filter_):
     srcFolder = GetMergedFolder()
     folder_dest = GetAdvanceFilterFolder()
     mgr = CAdvanceFilterMgr()
     mgr.FilterFolder(srcFolder, filter_ ,folder_dest)
+
+def __advanceFilterEveryDay(filter_):
+    srcFolder = GetMergedFolder()
+    folder_dest = GetAdvanceFilterFolder()
+    mgr = CAdvanceFilterMgr()
+    mgr.FilterFolderEveryDay(srcFolder, filter_ ,folder_dest)
     
 def __advanceFilterByFilter(filters):
     srcFolder = GetMergedFolder()
@@ -79,23 +86,27 @@ def MergeAllResult():
         res.to_excel(fileName,encoding="utf_8_sig", index=False)
         
 def DoAdvanceFilterMain():
-    Test()
+    filter1 = CAdvanceFilter_ShortDistance(0.5)
+    filter2 = CAdvanceFilter_RSI_DunHua(threshold_max=83)
+    __advanceFilter(filter1)
+    __advanceFilter(filter2)
 #     advanceFilterByFilter()
 #     advanceFilterAll()
     
 
 def Test():
-    filter1 = CAdvanceFilter_ShortDistance(1.0)
-    filter2 = CAdvanceFilter_RSI_DunHua(threshold_max=80)
-    filter3 = CAdvanceFilter_MidDistance(1.0)
+    filter1 = CAdvanceFilter_ShortDistance(0.5)
+    filter2 = CAdvanceFilter_ShortDistanceEx(0.8)
     __advanceFilter(filter1)
     __advanceFilter(filter2)
 
 if __name__ == '__main__':
-    #DoAdvanceFilterMain()
+    DoAdvanceFilterMain()
     #MergeAllResult()
-    Test()
+#     Test()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)
 #     __advanceFilter(filter3)
+#     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)
+#     __advanceFilterEveryDay(filter2)
     
     
