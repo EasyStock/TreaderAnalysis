@@ -9,7 +9,7 @@ from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
 from StockDataItem.StockItemDef import stock_Days, stock_Date,\
     stock_Name, stock_DISTANCE_MA_SHORT, stock_ZhangDieFu, stock_Volumn_Ratio,\
     stock_DistanceMA60, stock_DistanceMA5, stock_ClosePrice, stock_CLOSE_TO_BOLLUP,\
-    stock_DistanceMA20
+    stock_DistanceMA20, stock_DistanceMA10
 
 class CAdvanceFilter_ShortDistance(IAdvanceFilterBase):
 
@@ -46,11 +46,12 @@ class CAdvanceFilter_ShortDistance(IAdvanceFilterBase):
         if not self.ValidateData(df):
             return (False,)
         
-        df1 = pd.DataFrame(df, columns=(stock_Date,stock_DISTANCE_MA_SHORT,stock_ZhangDieFu,stock_Volumn_Ratio,stock_DistanceMA60,stock_DistanceMA5,stock_DistanceMA20,stock_CLOSE_TO_BOLLUP),copy = True)        
+        df1 = pd.DataFrame(df, columns=(stock_Date,stock_DISTANCE_MA_SHORT,stock_ZhangDieFu,stock_Volumn_Ratio,stock_DistanceMA60,stock_DistanceMA5,stock_DistanceMA10,stock_DistanceMA20,stock_CLOSE_TO_BOLLUP),copy = True)        
         zhangDieFu = float(df1.iloc[-1][stock_ZhangDieFu])
         distanceOfMA5 = float(df1.iloc[-1][stock_DistanceMA5])
+        distanceOfMA10 = float(df1.iloc[-1][stock_DistanceMA10])
         distanceOfMA20 = float(df1.iloc[-1][stock_DistanceMA20])
-        if zhangDieFu <0 or distanceOfMA5 < 0 or distanceOfMA20 < 0:
+        if zhangDieFu <0 or distanceOfMA5 < 0 or distanceOfMA10 < 0 or distanceOfMA20 < 0:
             return (False,) 
         
         count = 0
@@ -62,7 +63,10 @@ class CAdvanceFilter_ShortDistance(IAdvanceFilterBase):
                 continue
             break
         
-        zhangDieFu = float(df1.iloc[-1][stock_ZhangDieFu])
+        zhangDieFu = float(df.iloc[-1][stock_ZhangDieFu])
+        closeLast4 = float(df.iloc[-4][stock_ClosePrice])
+        closeLast1 = float(df.iloc[-1][stock_ClosePrice])
+        zhangDieFuLast3 = (closeLast1 - closeLast4) / closeLast4 * 100
         if count >=1 and zhangDieFu >0:
             ret = {}
             ret["0日期"] = df.iloc[-1][stock_Date]
@@ -75,6 +79,7 @@ class CAdvanceFilter_ShortDistance(IAdvanceFilterBase):
             ret['到MA60的距离'] = float(df1.iloc[-1][stock_DistanceMA60])
             ret['到MA5的距离'] = float(df1.iloc[-1][stock_DistanceMA5])
             ret['到BOLL上轨距离'] = float(df1.iloc[-1][stock_CLOSE_TO_BOLLUP])
+            ret['最后三天涨幅'] = zhangDieFuLast3 
             key = '%s收盘价'%(df.iloc[-1][stock_Date])
             ret[key] = df.iloc[-1][stock_ClosePrice]
             return (True,ret)

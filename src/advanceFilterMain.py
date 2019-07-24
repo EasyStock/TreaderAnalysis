@@ -95,15 +95,17 @@ def DoAdvanceFilterMain():
     
 
 def Test():
-    filter1 = CAdvanceFilter_ShortDistance(0.5)
-    filter2 = CAdvanceFilter_ShortDistanceEx(0.8)
-    __advanceFilter(filter1)
-    __advanceFilter(filter2)
+#     filter1 = CAdvanceFilter_ShortDistance(0.5)
+#     __advanceFilter(filter1)
+#     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)
+#     __advanceFilter(filter2)
+    filter3 = CAdvanceFilter_MidDistance(0.8)
+    __advanceFilter(filter3)
 
 if __name__ == '__main__':
-    DoAdvanceFilterMain()
+    #DoAdvanceFilterMain()
     #MergeAllResult()
-#     Test()
+    Test()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)
 #     __advanceFilter(filter3)
 #     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)

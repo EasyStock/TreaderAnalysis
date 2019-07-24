@@ -8,7 +8,7 @@ import pandas as pd
 from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
 from StockDataItem.StockItemDef import stock_Days, stock_Date,\
     stock_Name, stock_ZhangDieFu, stock_Volumn_Ratio, stock_DistanceMA5, stock_ClosePrice,\
-    stock_DISTANCE_MA_MID, stock_DistanceMA120, stock_CLOSE_TO_BOLLUP
+    stock_DISTANCE_MA_MID, stock_DistanceMA120, stock_CLOSE_TO_BOLLUP, stock_MA60
 
 class CAdvanceFilter_MidDistance(IAdvanceFilterBase):
 
@@ -48,9 +48,20 @@ class CAdvanceFilter_MidDistance(IAdvanceFilterBase):
         df1 = pd.DataFrame(df, columns=(stock_Date,stock_DISTANCE_MA_MID,stock_ZhangDieFu,stock_Volumn_Ratio,stock_DistanceMA120,stock_DistanceMA5,stock_CLOSE_TO_BOLLUP),copy = True)        
         count = 0
         rows = df1.shape[0]
+        ma60_1 = float(df.iloc[-1][stock_MA60])
+        ma60_2 = float(df.iloc[-2][stock_MA60])
+        ma60_3 = float(df.iloc[-2][stock_MA60])
+        ma60_6 = float(df.iloc[-6][stock_MA60])
+        avgMa60 = (ma60_1 - ma60_6)/5
+        last = ma60_1 - ma60_2
+        last2 = ma60_2 - ma60_3
+        if last < 0:
+            if avgMa60 > 0.02:
+                return (False,)
+                
         for i in range(2, rows):
-            shortDistance = float(df1.iloc[-i][stock_DISTANCE_MA_MID])
-            if  shortDistance < self.threshold:
+            midDistance = float(df1.iloc[-i][stock_DISTANCE_MA_MID])
+            if  midDistance < self.threshold:
                 count = count + 1
                 continue
             break
@@ -67,6 +78,8 @@ class CAdvanceFilter_MidDistance(IAdvanceFilterBase):
             ret['到MA120的距离'] = float(df1.iloc[-1][stock_DistanceMA120])
             ret['到MA5的距离'] = float(df1.iloc[-1][stock_DistanceMA5])
             ret['到BOLL上轨距离'] = float(df1.iloc[-1][stock_CLOSE_TO_BOLLUP])
+            ret['MA60一阶导数'] = last
+            ret['MA60二阶导数'] = last - last2
             key = '%s收盘价'%(df.iloc[-1][stock_Date])
             ret[key] = df.iloc[-1][stock_ClosePrice]
             return (True,ret)
