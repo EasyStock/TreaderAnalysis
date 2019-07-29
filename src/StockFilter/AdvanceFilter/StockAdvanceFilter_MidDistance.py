@@ -50,7 +50,7 @@ class CAdvanceFilter_MidDistance(IAdvanceFilterBase):
         rows = df1.shape[0]
         ma60_1 = float(df.iloc[-1][stock_MA60])
         ma60_2 = float(df.iloc[-2][stock_MA60])
-        ma60_3 = float(df.iloc[-2][stock_MA60])
+        ma60_3 = float(df.iloc[-3][stock_MA60])
         ma60_6 = float(df.iloc[-6][stock_MA60])
         avgMa60 = (ma60_1 - ma60_6)/5
         last = ma60_1 - ma60_2
@@ -71,7 +71,7 @@ class CAdvanceFilter_MidDistance(IAdvanceFilterBase):
             ret["0日期"] = df.iloc[-1][stock_Date]
             ret["1股票简称"] = df.iloc[-1][stock_Name]
             ret[self.filterName] = "YES"
-            ret["短线均线纠结天数"] = count
+            ret["中线均线纠结天数"] = count
             ret['最后一天纠结值'] = float(df1.iloc[-1][stock_DISTANCE_MA_MID])
             ret['最后一天涨跌幅'] = float(df1.iloc[-1][stock_ZhangDieFu])
             ret['最后一天量比'] = float(df1.iloc[-1][stock_Volumn_Ratio])
