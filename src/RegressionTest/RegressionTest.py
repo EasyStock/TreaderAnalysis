@@ -8,8 +8,8 @@ from StockDataItem.StockItemDef import stock_ID, stock_ClosePrice
 
 def Test():
     srcFile = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/多日过滤/中线均线纠结_2019-07-25.xlsx'
-    destFile = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/每日数据/2019-07-26.xlsx'
-    destFile1 = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/2019-07-26_aa.xlsx'
+    destFile = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/每日数据/2019-07-31.xlsx'
+    destFile1 = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/2019-07-31_aa.xlsx'
     src_df = pd.read_excel(srcFile, index_col = None, encoding='utf_8_sig')
     dest_df = pd.read_excel(destFile, index_col = None, encoding='utf_8_sig')
     df1 = pd.DataFrame(dest_df, columns=(stock_ID, stock_ClosePrice),copy = True)

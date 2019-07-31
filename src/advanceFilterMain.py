@@ -92,6 +92,8 @@ def DoAdvanceFilterMain():
     __advanceFilter(filter2)
 #     advanceFilterByFilter()
 #     advanceFilterAll()
+    filter3 = CAdvanceFilter_MidDistance(0.8)
+    __advanceFilter(filter3)
     
 
 def Test():
