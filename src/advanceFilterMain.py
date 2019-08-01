@@ -15,6 +15,8 @@ import pandas as pd
 from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistance import CAdvanceFilter_ShortDistance
 from StockFilter.AdvanceFilter.StockAdvanceFilter_MidDistance import CAdvanceFilter_MidDistance
 from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistanceEx import CAdvanceFilter_ShortDistanceEx
+from StockFilter.FilterMgr.StockAdvanceFilterMgrEx import CStockAdvanceFilterMgrEx,\
+    K_ADVANCE_FILTER_EX_MID_DISTANCE
 
 def __advanceFilter(filter_):
     srcFolder = GetMergedFolder()
@@ -103,11 +105,21 @@ def Test():
 #     __advanceFilter(filter2)
     filter3 = CAdvanceFilter_MidDistance(0.8)
     __advanceFilter(filter3)
+    
+
+def AdvanceFilterTest():
+    advanceMgr = CStockAdvanceFilterMgrEx()
+    threadFile = u'/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/threshold.xlsx'
+    advanceMgr.ReadThreshold(threadFile)
+    folder = u'/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/合并/'
+    outFolder = u'/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/'
+    filterName = K_ADVANCE_FILTER_EX_MID_DISTANCE
+    advanceMgr.FilterFolder(folder, outFolder, filterName)
 
 if __name__ == '__main__':
     #DoAdvanceFilterMain()
     #MergeAllResult()
-    Test()
+    AdvanceFilterTest()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)
 #     __advanceFilter(filter3)
 #     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)

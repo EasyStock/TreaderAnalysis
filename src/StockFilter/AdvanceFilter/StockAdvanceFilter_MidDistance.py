@@ -8,7 +8,8 @@ import pandas as pd
 from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
 from StockDataItem.StockItemDef import stock_Days, stock_Date,\
     stock_Name, stock_ZhangDieFu, stock_Volumn_Ratio, stock_DistanceMA5, stock_ClosePrice,\
-    stock_DISTANCE_MA_MID, stock_DistanceMA120, stock_CLOSE_TO_BOLLUP, stock_MA60
+    stock_DISTANCE_MA_MID, stock_DistanceMA120, stock_CLOSE_TO_BOLLUP, stock_MA60,\
+    stock_MA5, stock_MA10, stock_MA20
 
 class CAdvanceFilter_MidDistance(IAdvanceFilterBase):
 
@@ -45,7 +46,14 @@ class CAdvanceFilter_MidDistance(IAdvanceFilterBase):
         if not self.ValidateData(df):
             return (False,)
         
-        df1 = pd.DataFrame(df, columns=(stock_Date,stock_DISTANCE_MA_MID,stock_ZhangDieFu,stock_Volumn_Ratio,stock_DistanceMA120,stock_DistanceMA5,stock_CLOSE_TO_BOLLUP),copy = True)        
+        df1 = pd.DataFrame(df, columns=(stock_Date,stock_ClosePrice, stock_MA5, stock_MA10, stock_MA20,stock_DISTANCE_MA_MID,stock_ZhangDieFu,stock_Volumn_Ratio,stock_DistanceMA120,stock_DistanceMA5,stock_CLOSE_TO_BOLLUP),copy = True) 
+        close = float(df.iloc[-1][stock_ClosePrice])   
+        ma5 = float(df.iloc[-1][stock_MA5]) 
+        ma10 = float(df.iloc[-1][stock_MA10])
+        ma20 = float(df.iloc[-1][stock_MA20])
+        if close < ma5 or close < ma10 or close < ma20:
+            return (False,)
+        
         count = 0
         rows = df1.shape[0]
         ma60_1 = float(df.iloc[-1][stock_MA60])
@@ -71,6 +79,7 @@ class CAdvanceFilter_MidDistance(IAdvanceFilterBase):
             ret["0日期"] = df.iloc[-1][stock_Date]
             ret["1股票简称"] = df.iloc[-1][stock_Name]
             ret[self.filterName] = "YES"
+            ret["阈值"] = self.threshold
             ret["中线均线纠结天数"] = count
             ret['最后一天纠结值'] = float(df1.iloc[-1][stock_DISTANCE_MA_MID])
             ret['最后一天涨跌幅'] = float(df1.iloc[-1][stock_ZhangDieFu])
