@@ -4,22 +4,22 @@ Created on Jun 10, 2019
 @author: mac
 '''
 
-import pandas as pd
 from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
 from StockDataItem.StockItemDef import stock_Days, stock_Date,\
-    stock_BOLL_Band_width, stock_BOLLMid, stock_Name
+    stock_BOLL_Band_width, stock_Name, stock_ZhangDieFu, stock_BOLLMid
 
 class CAdvanceFilter_BOLL_WIDTH(IAdvanceFilterBase):
 
-    def __init__(self):
+    def __init__(self,threshold = None):
         '''
         params threshold_min
         '''
-        IAdvanceFilterBase.__init__(self, None)
+        IAdvanceFilterBase.__init__(self,None)
         self.filterName = u'BOLL带宽'
-        self.FilterDescribe = u'BOLL带宽连续三天带宽变大'
+        self.FilterDescribe = u'BOLL带宽连续2天 带宽变大'
+        self.threshold = threshold
         
-    def ValidateData(self, df):
+    def _validateData(self, df):
         try:
             day = float(df.iloc[-1][stock_Days])
             if day < 250:
@@ -29,32 +29,34 @@ class CAdvanceFilter_BOLL_WIDTH(IAdvanceFilterBase):
 
         try:
             float(df.iloc[-3][stock_BOLL_Band_width])
-            float(df.iloc[-3][stock_BOLLMid])
         except:
             return False
     
         return True
     
+    def _Case1(self,df):
+        last1 = float(df.iloc[-1][stock_BOLL_Band_width])
+        last2 = float(df.iloc[-2][stock_BOLL_Band_width])
+        last3 = float(df.iloc[-3][stock_BOLL_Band_width])
+        if last2< last3 and last1 >= last2:
+            return True
+        
+        return False
+    
+    def _Case2(self,df):
+        last1 = float(df.iloc[-1][stock_BOLL_Band_width])
+        last2 = float(df.iloc[-2][stock_BOLL_Band_width])
+        last3 = float(df.iloc[-3][stock_BOLL_Band_width])
+        if last1 >= last2 >= last3:
+            return True
+        
+        return False  
+        
 
-    def FilterBy(self, df):
-        if not self.ValidateData(df):
-            return (False,)
-        
-        df1 = pd.DataFrame(df, columns=(stock_Date,stock_BOLL_Band_width,stock_BOLLMid),copy = True)
-        
-        count = 1
-        rows = df1.shape[0]
-        last = float(df1.iloc[-1][stock_BOLL_Band_width])
-        for i in range(2, rows):
-            band_width = float(df1.iloc[-i][stock_BOLL_Band_width])
-            if band_width < last:
-                last = band_width
-                count = count + 1
-            else:
-                break
-        l1 = float(df1.iloc[-1][stock_BOLLMid])
-        l2 = float(df1.iloc[-2][stock_BOLLMid])
-        l3 = float(df1.iloc[-3][stock_BOLLMid])
+    def _calcFlag(self,df):
+        l1 = float(df.iloc[-1][stock_BOLLMid])
+        l2 = float(df.iloc[-2][stock_BOLLMid])
+        l3 = float(df.iloc[-3][stock_BOLLMid])
         flag = 'UnKnown'
         if l1 >= l2 >= l3:
             flag = 'UP'
@@ -62,16 +64,53 @@ class CAdvanceFilter_BOLL_WIDTH(IAdvanceFilterBase):
             flag = 'DOWN'
         else:
             flag = 'UnKnown'
-        if count >=1 and flag == 'UP':
-            ret = {}
-            ret["0日期"] = df.iloc[-1][stock_Date]
-            ret["1股票简称"] = df.iloc[-1][stock_Name]
-            ret[self.filterName] = "YES"
-            ret["BOLL方向"] = flag
-            ret["BOLL带宽变大天数"] = count
-            return (True,ret)
         
-        return (False,)
+        return flag
+    
+    def _validateParam(self,df):
+        if self.threshold == None:
+            self.threshold = 15.3 #2倍标准差区间1.6 ~ 15.3
+        elif self.threshold > 15.3:
+            self.threshold = 15.3
+        elif self.threshold < 1.6:
+            self.threshold = 1.6
+
+        last1 = float(df.iloc[-1][stock_BOLL_Band_width])
+        last2 = float(df.iloc[-2][stock_BOLL_Band_width])
+        last3 = float(df.iloc[-3][stock_BOLL_Band_width])
+
+        if last1 > self.threshold and last2 > self.threshold and last3 > self.threshold:
+            return False
+        
+        return True
+            
+    def FilterBy(self, df):
+        if not self._validateData(df):
+            return (False,)
+        
+        if not self._validateParam(df):
+            return (False,)
+        
+        caseFlag = "case1"
+        if not self._Case1(df):
+            if not self._Case2(df):
+                return (False,)
+            else:
+                caseFlag = "case2"
+            
+
+
+        flag = self._calcFlag(df)
+        ret = {}
+        ret["0日期"] = df.iloc[-1][stock_Date]
+        ret["1股票简称"] = df.iloc[-1][stock_Name]
+        ret[self.filterName] = "YES"
+        ret["BOLL方向"] = flag
+        ret["最后一天涨幅"] = float(df.iloc[-1][stock_ZhangDieFu])
+        ret['BOLL带宽阈值'] = self.threshold
+        ret["Case"] = caseFlag
+        return (True,ret)
+
     
 if __name__ == '__main__':
     pass

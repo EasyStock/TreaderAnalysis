@@ -16,7 +16,8 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistance import CAdvanceF
 from StockFilter.AdvanceFilter.StockAdvanceFilter_MidDistance import CAdvanceFilter_MidDistance
 from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistanceEx import CAdvanceFilter_ShortDistanceEx
 from StockFilter.FilterMgr.StockAdvanceFilterMgrEx import CStockAdvanceFilterMgrEx,\
-    K_ADVANCE_FILTER_EX_MID_DISTANCE
+    K_ADVANCE_FILTER_EX_MID_DISTANCE, K_ADVANCE_FILTER_EX_BOLL_WIDTH
+from StockFilter.AdvanceFilter.StockAdvanceFilter_NewHigh import CAdvanceFilter_NewHigh
 
 def __advanceFilter(filter_):
     srcFolder = GetMergedFolder()
@@ -103,9 +104,18 @@ def Test():
 #     __advanceFilter(filter1)
 #     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)
 #     __advanceFilter(filter2)
-    filter3 = CAdvanceFilter_MidDistance(0.8)
-    __advanceFilter(filter3)
-    
+#     filter3 = CAdvanceFilter_MidDistance(0.8)
+#     __advanceFilter(filter3)
+#     filter4 = CAdvanceFilter_NewHigh(100)
+#     __advanceFilter(filter4)
+#     filter5 = CAdvanceFilter_NewHigh(50)
+#     __advanceFilter(filter5)
+#     filter6 = CAdvanceFilter_NewHigh(30)
+#     __advanceFilter(filter6)
+#     filter7 = CAdvanceFilter_NewHigh(10)
+#     __advanceFilter(filter7)
+    filter8 = CAdvanceFilter_NewHigh(5)
+    __advanceFilter(filter8)
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()
@@ -113,12 +123,14 @@ def AdvanceFilterTest():
     advanceMgr.ReadThreshold(threadFile)
     folder = u'/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/合并/'
     outFolder = u'/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/'
-    filterName = K_ADVANCE_FILTER_EX_MID_DISTANCE
+    #filterName = K_ADVANCE_FILTER_EX_MID_DISTANCE
+    filterName = K_ADVANCE_FILTER_EX_BOLL_WIDTH
     advanceMgr.FilterFolder(folder, outFolder, filterName)
 
 if __name__ == '__main__':
     #DoAdvanceFilterMain()
     #MergeAllResult()
+    #Test()
     AdvanceFilterTest()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)
 #     __advanceFilter(filter3)

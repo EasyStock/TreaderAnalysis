@@ -12,29 +12,25 @@ import os
 from datetime import date
 
 K_ADVANCE_FILTER_EX_MID_DISTANCE = "中线均线纠结"
+K_ADVANCE_FILTER_EX_BOLL_WIDTH = "BOLL带宽"
 
 class CStockAdvanceFilterMgrEx(object):
     def __init__(self):
         self.threshold = None
-        self.filterNames = [
-            '短线均线纠结',
-            '中线均线纠结',
-            '长线均线纠结',
-            'BOLL带宽',
-            ]
     
     def _getBOLLWidthFilterWithStockID(self, stockID):
         if self.threshold is None:
             return None
         
-        threhold = 1.5
+        threhold = 16
         try:
-            key = "_low"%(stock_BOLL_Band_width)
+            key = "%s_low"%(stock_BOLL_Band_width)
             threhold = self.threshold.loc[stockID][key]
-            CAdvanceFilter_BOLL_WIDTH()
         except:
             pass
         
+        flter = CAdvanceFilter_BOLL_WIDTH(threhold)
+        return flter
     
     def _getMidDistanceFilterWithStockID(self,stockID):
         if self.threshold is None:
@@ -62,6 +58,8 @@ class CStockAdvanceFilterMgrEx(object):
         filter_ = None
         if filterName == K_ADVANCE_FILTER_EX_MID_DISTANCE:
             filter_ = self._getMidDistanceFilterWithStockID(stockID)
+        elif filterName == K_ADVANCE_FILTER_EX_BOLL_WIDTH:
+            filter_ = self._getBOLLWidthFilterWithStockID(stockID)
     
         return filter_.FilterBy(df)
     
