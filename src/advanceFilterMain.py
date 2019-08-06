@@ -9,7 +9,7 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_BOLL_WIDTH import CAdvanceFilt
 from StockFilter.AdvanceFilter.StockAdvanceFilter_Red3 import CAdvanceFilter_Red3
 from StockFilter.FilterMgr.StockAdvanceFilterMgr import CAdvanceFilterMgr
 from PathManager.StockPathManager import GetMergedFolder, GetAdvanceFilterFolder,\
-    GetRawDataFolder
+    GetRawDataFolder, GetOutDataFolder, GetAdvanceFilterExFolder
 import os
 import pandas as pd
 from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistance import CAdvanceFilter_ShortDistance
@@ -18,6 +18,7 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistanceEx import CAdvanc
 from StockFilter.FilterMgr.StockAdvanceFilterMgrEx import CStockAdvanceFilterMgrEx,\
     K_ADVANCE_FILTER_EX_MID_DISTANCE, K_ADVANCE_FILTER_EX_BOLL_WIDTH
 from StockFilter.AdvanceFilter.StockAdvanceFilter_NewHigh import CAdvanceFilter_NewHigh
+from StockFilter.AdvanceFilter.StockAdvanceFilter_Big_Volumn import CAdvanceFilter_BigVolumn
 
 def __advanceFilter(filter_):
     srcFolder = GetMergedFolder()
@@ -87,8 +88,8 @@ def MergeAllResult():
         res = res.fillna("NO")
         fileName = u'%s/../%s.xlsx' %(folder_dest,date)
         res.to_excel(fileName,encoding="utf_8_sig", index=False)
-        
-def DoAdvanceFilterMain():
+
+def DoAdvanceFilter():
     filter1 = CAdvanceFilter_ShortDistance(0.5)
     filter2 = CAdvanceFilter_RSI_DunHua(threshold_max=83)
     __advanceFilter(filter1)
@@ -98,7 +99,26 @@ def DoAdvanceFilterMain():
     filter3 = CAdvanceFilter_MidDistance(0.8)
     __advanceFilter(filter3)
     
-
+    filter8 = CAdvanceFilter_NewHigh(5)
+    __advanceFilter(filter8)
+         
+def DoAdvanceFilterMain():
+    DoAdvanceFilter()
+    DoAdvanceFilterEx()
+    
+def DoAdvanceFilterEx():
+    advanceMgr = CStockAdvanceFilterMgrEx()
+    threadFile = '%s/threshold.xlsx'%(GetOutDataFolder())
+    advanceMgr.ReadThreshold(threadFile)
+    folder = GetMergedFolder()
+    outFolder = GetAdvanceFilterExFolder()
+    fitlerNames = [
+        K_ADVANCE_FILTER_EX_BOLL_WIDTH,
+        K_ADVANCE_FILTER_EX_MID_DISTANCE
+        ]
+    for filterName in fitlerNames:
+        advanceMgr.FilterFolder(folder, outFolder, filterName)
+    
 def Test():
 #     filter1 = CAdvanceFilter_ShortDistance(0.5)
 #     __advanceFilter(filter1)
@@ -114,8 +134,11 @@ def Test():
 #     __advanceFilter(filter6)
 #     filter7 = CAdvanceFilter_NewHigh(10)
 #     __advanceFilter(filter7)
-    filter8 = CAdvanceFilter_NewHigh(5)
-    __advanceFilter(filter8)
+#     filter8 = CAdvanceFilter_NewHigh(5)
+#     __advanceFilter(filter8)
+    
+   filter9 =  CAdvanceFilter_BigVolumn(40, 3)
+   __advanceFilter(filter9)
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()
@@ -130,8 +153,8 @@ def AdvanceFilterTest():
 if __name__ == '__main__':
     #DoAdvanceFilterMain()
     #MergeAllResult()
-    #Test()
-    AdvanceFilterTest()
+    Test()
+#     AdvanceFilterTest()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)
 #     __advanceFilter(filter3)
 #     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)

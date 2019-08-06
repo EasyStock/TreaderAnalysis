@@ -9,6 +9,7 @@ from StockDataItemIO.StockItemIO import CStockItemIO
 from StockMerge.MergeStock import MergeStockMgr
 from advanceFilterMain import DoAdvanceFilterMain
 from filterMain import DoFilterMain
+from thresholdCalcMgr import CalcThreshold
 
 def ConverHTMLToXlSX():
     folder = GetRawDataFolder()
@@ -36,6 +37,8 @@ def MergeFiles():
 if __name__ == '__main__':
     ConverHTMLToXlSX()
     MergeFiles()
+    CalcThreshold()
+    
     DoFilterMain()
     DoAdvanceFilterMain()
    
