@@ -137,8 +137,8 @@ def Test():
 #     filter8 = CAdvanceFilter_NewHigh(5)
 #     __advanceFilter(filter8)
     
-   filter9 =  CAdvanceFilter_BigVolumn(40, 3)
-   __advanceFilter(filter9)
+    filter9 =  CAdvanceFilter_BigVolumn(40, 3)
+    __advanceFilter(filter9)
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()
@@ -153,8 +153,8 @@ def AdvanceFilterTest():
 if __name__ == '__main__':
     #DoAdvanceFilterMain()
     #MergeAllResult()
-    Test()
-#     AdvanceFilterTest()
+    #Test()
+    AdvanceFilterTest()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)
 #     __advanceFilter(filter3)
 #     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)
