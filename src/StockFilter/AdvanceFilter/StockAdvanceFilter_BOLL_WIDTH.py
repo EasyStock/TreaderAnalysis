@@ -6,7 +6,7 @@ Created on Jun 10, 2019
 
 from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
 from StockDataItem.StockItemDef import stock_Days, stock_Date,\
-    stock_BOLL_Band_width, stock_Name, stock_ZhangDieFu, stock_BOLLMid
+    stock_BOLL_Band_width, stock_Name, stock_ZhangDieFu, stock_BOLLMid, stock_CLOSE_TO_BOLLMID
 
 class CAdvanceFilter_BOLL_WIDTH(IAdvanceFilterBase):
 
@@ -35,19 +35,27 @@ class CAdvanceFilter_BOLL_WIDTH(IAdvanceFilterBase):
         return True
     
     def _Case1(self,df):
+        '''
+        BOll带宽开始转折，股价站上中轨
+        '''
         last1 = float(df.iloc[-1][stock_BOLL_Band_width])
         last2 = float(df.iloc[-2][stock_BOLL_Band_width])
         last3 = float(df.iloc[-3][stock_BOLL_Band_width])
-        if last2< last3 and last1 >= last2:
+        lastPriceToMid = float(df.iloc[-1][stock_CLOSE_TO_BOLLMID])
+        if last2< last3 and last1 >= last2 and lastPriceToMid < 0:
             return True
         
         return False
     
     def _Case2(self,df):
+        '''
+        BOLL开口了，股价在中轨之上
+        '''
         last1 = float(df.iloc[-1][stock_BOLL_Band_width])
         last2 = float(df.iloc[-2][stock_BOLL_Band_width])
         last3 = float(df.iloc[-3][stock_BOLL_Band_width])
-        if last1 >= last2 >= last3:
+        lastPriceToMid = float(df.iloc[-1][stock_CLOSE_TO_BOLLMID])
+        if last1 >= last2 >= last3 and lastPriceToMid < 0:
             return True
         
         return False  
@@ -109,6 +117,7 @@ class CAdvanceFilter_BOLL_WIDTH(IAdvanceFilterBase):
         ret["最后一天涨幅"] = float(df.iloc[-1][stock_ZhangDieFu])
         ret['BOLL带宽阈值'] = self.threshold
         ret["Case"] = caseFlag
+        ret['到中轨的距离'] = float(df.iloc[-1][stock_CLOSE_TO_BOLLMID])
         return (True,ret)
 
     

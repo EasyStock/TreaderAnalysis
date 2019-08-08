@@ -14,6 +14,7 @@ SummaryPath = '%s/汇总/'%(outPath)
 mergedPath = '%s/合并/'%(outPath)
 advanceFilterPath = '%s/多日过滤/'%(outPath)
 advanceFilterExPath = '%s/多日过滤Ex/'%(outPath)
+combinedFilterPath = '%s/组合过滤/'%(outPath)
 
 analysisBanKuaiPath = '%s/板块分析/'%(analysisPath)
 analysisBanKuaiPath_Repeatable = '%s/板块分析_可重复/'%(analysisPath)
@@ -93,6 +94,8 @@ def GetAdvanceFilterFolder():
 def GetAdvanceFilterExFolder():
     return getFolder(advanceFilterExPath)
 
+def GetCombinedFilterFolder():
+    return getFolder(combinedFilterPath)
 
 if __name__ == '__main__':
     CreateAllFolder()

@@ -101,9 +101,12 @@ def DoAdvanceFilter():
     
     filter8 = CAdvanceFilter_NewHigh(5)
     __advanceFilter(filter8)
-         
+    
+    filter9 =  CAdvanceFilter_BigVolumn(40, 3)
+    __advanceFilter(filter9)
+    
 def DoAdvanceFilterMain():
-    DoAdvanceFilter()
+    #DoAdvanceFilter()
     DoAdvanceFilterEx()
     
 def DoAdvanceFilterEx():
@@ -154,7 +157,8 @@ if __name__ == '__main__':
     #DoAdvanceFilterMain()
     #MergeAllResult()
     #Test()
-    AdvanceFilterTest()
+    DoAdvanceFilterEx()
+    #AdvanceFilterTest()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)
 #     __advanceFilter(filter3)
 #     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)

@@ -53,8 +53,12 @@ class CStockAdvanceFilterMgrEx(object):
         self.threshold = pd.read_excel(threadFile, encoding='utf_8_sig', index_col = 0)
     
     
-    def FilterFile(self, stockID, srcFileName, filterName):
+    def ReadSrcFile(self, srcFileName):
         df = pd.read_excel(srcFileName, index_col = None, encoding='utf_8_sig')
+        return df
+    
+    def FilterFile(self, stockID, srcFileName, filterName):
+        df = self.ReadSrcFile(srcFileName)
         filter_ = None
         if filterName == K_ADVANCE_FILTER_EX_MID_DISTANCE:
             filter_ = self._getMidDistanceFilterWithStockID(stockID)
