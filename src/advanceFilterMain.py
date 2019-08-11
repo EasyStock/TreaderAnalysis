@@ -19,6 +19,7 @@ from StockFilter.FilterMgr.StockAdvanceFilterMgrEx import CStockAdvanceFilterMgr
     K_ADVANCE_FILTER_EX_MID_DISTANCE, K_ADVANCE_FILTER_EX_BOLL_WIDTH
 from StockFilter.AdvanceFilter.StockAdvanceFilter_NewHigh import CAdvanceFilter_NewHigh
 from StockFilter.AdvanceFilter.StockAdvanceFilter_Big_Volumn import CAdvanceFilter_BigVolumn
+from StockFilter.AdvanceFilter.StockAdvanceFilter_2BRule import CAdvanceFilter_2BRule
 
 def __advanceFilter(filter_):
     srcFolder = GetMergedFolder()
@@ -140,8 +141,11 @@ def Test():
 #     filter8 = CAdvanceFilter_NewHigh(5)
 #     __advanceFilter(filter8)
     
-    filter9 =  CAdvanceFilter_BigVolumn(40, 3)
-    __advanceFilter(filter9)
+#     filter9 =  CAdvanceFilter_BigVolumn(40, 3)
+#     __advanceFilter(filter9)
+    
+    filter10 = CAdvanceFilter_2BRule(40)
+    __advanceFilter(filter10)
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()
@@ -156,8 +160,8 @@ def AdvanceFilterTest():
 if __name__ == '__main__':
     #DoAdvanceFilterMain()
     #MergeAllResult()
-    #Test()
-    DoAdvanceFilterEx()
+    Test()
+#     DoAdvanceFilterEx()
     #AdvanceFilterTest()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)
 #     __advanceFilter(filter3)
