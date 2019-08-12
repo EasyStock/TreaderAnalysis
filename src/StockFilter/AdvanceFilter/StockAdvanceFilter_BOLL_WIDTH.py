@@ -6,7 +6,8 @@ Created on Jun 10, 2019
 
 from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
 from StockDataItem.StockItemDef import stock_Days, stock_Date,\
-    stock_BOLL_Band_width, stock_Name, stock_ZhangDieFu, stock_BOLLMid, stock_CLOSE_TO_BOLLMID
+    stock_BOLL_Band_width, stock_Name, stock_ZhangDieFu, stock_BOLLMid, stock_CLOSE_TO_BOLLMID,\
+    stock_CLOSE_TO_BOLLUP
 
 class CAdvanceFilter_BOLL_WIDTH(IAdvanceFilterBase):
 
@@ -118,6 +119,7 @@ class CAdvanceFilter_BOLL_WIDTH(IAdvanceFilterBase):
         ret['BOLL带宽阈值'] = self.threshold
         ret["Case"] = caseFlag
         ret['到中轨的距离'] = float(df.iloc[-1][stock_CLOSE_TO_BOLLMID])
+        ret['到上轨的距离'] = float(df.iloc[-1][stock_CLOSE_TO_BOLLUP])
         return (True,ret)
 
     

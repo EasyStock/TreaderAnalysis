@@ -14,6 +14,9 @@ def CombinedFilter_BOLL_Volumn():
     threholdFile = '%s/threshold.xlsx'%(GetOutDataFolder())
     combine.Filter(srcFolder, folder_dest, threholdFile)
     
+
+def CombinedFilteMain():
+    CombinedFilter_BOLL_Volumn()
     
 if __name__ == '__main__':
     CombinedFilter_BOLL_Volumn()

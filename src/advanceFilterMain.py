@@ -20,6 +20,7 @@ from StockFilter.FilterMgr.StockAdvanceFilterMgrEx import CStockAdvanceFilterMgr
 from StockFilter.AdvanceFilter.StockAdvanceFilter_NewHigh import CAdvanceFilter_NewHigh
 from StockFilter.AdvanceFilter.StockAdvanceFilter_Big_Volumn import CAdvanceFilter_BigVolumn
 from StockFilter.AdvanceFilter.StockAdvanceFilter_2BRule import CAdvanceFilter_2BRule
+from StockFilter.AdvanceFilter.StockAdvanceFilter_RSI_BeiLi import CAdvanceFilter_RSI_BeiLi
 
 def __advanceFilter(filter_):
     srcFolder = GetMergedFolder()
@@ -106,8 +107,11 @@ def DoAdvanceFilter():
     filter9 =  CAdvanceFilter_BigVolumn(40, 3)
     __advanceFilter(filter9)
     
+    filter10 = CAdvanceFilter_2BRule(40)
+    __advanceFilter(filter10)
+    
 def DoAdvanceFilterMain():
-    #DoAdvanceFilter()
+    DoAdvanceFilter()
     DoAdvanceFilterEx()
     
 def DoAdvanceFilterEx():
@@ -143,9 +147,12 @@ def Test():
     
 #     filter9 =  CAdvanceFilter_BigVolumn(40, 3)
 #     __advanceFilter(filter9)
+#     
+#     filter10 = CAdvanceFilter_2BRule(40)
+#     __advanceFilter(filter10)
     
-    filter10 = CAdvanceFilter_2BRule(40)
-    __advanceFilter(filter10)
+    filter11= CAdvanceFilter_RSI_BeiLi(40)
+    __advanceFilter(filter11)
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()
@@ -158,7 +165,7 @@ def AdvanceFilterTest():
     advanceMgr.FilterFolder(folder, outFolder, filterName)
 
 if __name__ == '__main__':
-    #DoAdvanceFilterMain()
+#     DoAdvanceFilterMain()
     #MergeAllResult()
     Test()
 #     DoAdvanceFilterEx()
