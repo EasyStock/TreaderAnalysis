@@ -110,6 +110,9 @@ def DoAdvanceFilter():
     filter10 = CAdvanceFilter_2BRule(40)
     __advanceFilter(filter10)
     
+    filter11= CAdvanceFilter_RSI_BeiLi(40)
+    __advanceFilter(filter11)
+    
 def DoAdvanceFilterMain():
     DoAdvanceFilter()
     DoAdvanceFilterEx()
