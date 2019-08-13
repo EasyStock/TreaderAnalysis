@@ -21,6 +21,18 @@ def Test():
     print(res)
     res.to_excel(destFile1,encoding="utf_8_sig", index=False)
     
+
+def RegressionTest(dailyFile, filterFile, outFile):
+    daily_df = pd.read_excel(dailyFile, index_col = None, encoding='utf_8_sig')
+    filter_df = pd.read_excel(filterFile, index_col = None, encoding='utf_8_sig')
+    date = dailyFile[dailyFile.rfind('/')+1:dailyFile.rfind('.')]
+    df1 = pd.DataFrame()
+    df1[stock_ID] = daily_df[stock_ID]
+    key = '%s_%s'%(date,stock_ClosePrice)
+    df1[key] = daily_df[stock_ClosePrice]
+    print(df1)
+    res = pd.merge(filter_df, df1)
+    res.to_excel(outFile,encoding="utf_8_sig", index=False)
     
 if __name__ == '__main__':
     Test()

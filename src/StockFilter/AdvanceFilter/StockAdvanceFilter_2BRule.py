@@ -69,13 +69,14 @@ class CAdvanceFilter_2BRule(IAdvanceFilterBase):
         
         if low1 < close2 < min_closePrice < close1:
             ret = {}
-            ret["0日期"] = df.iloc[-1][stock_Date]
+            date = df.iloc[-1][stock_Date]
+            ret["0日期"] = date
             ret["1股票简称"] = df.iloc[-1][stock_Name]
             ret[self.filterName] = "YES"
-            ret['最后一天涨跌幅%'] = df.iloc[-1][stock_ZhangDieFu]
-            ret['最后一天振幅%'] = (float(df.iloc[-1][stock_HighPrice]) - float(df.iloc[-1][stock_LowerPrice]))/float(df.iloc[-1][stock_ClosePrice_Yesterday])*100
-            ret['最后一天量比'] = float(df.iloc[-1][stock_Volumn_Ratio])
-            ret['最后一天收盘价'] = float(df.iloc[-1][stock_ClosePrice])
+            ret["%s_涨跌幅%"%(date)] = df.iloc[-1][stock_ZhangDieFu]
+            ret["%s_振幅%"%(date)] = (float(df.iloc[-1][stock_HighPrice]) - float(df.iloc[-1][stock_LowerPrice]))/float(df.iloc[-1][stock_ClosePrice_Yesterday])*100
+            ret["%s_量比"%(date)] = float(df.iloc[-1][stock_Volumn_Ratio])
+            ret["%s_收盘价"%(date)] = float(df.iloc[-1][stock_ClosePrice])
             ret['昨日收盘价'] = float(df.iloc[-2][stock_ClosePrice])
             res = self.RSI(df[-self.days:])
             ret.update(res)
