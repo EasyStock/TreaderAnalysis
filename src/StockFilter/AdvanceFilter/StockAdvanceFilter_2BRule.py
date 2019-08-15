@@ -50,14 +50,34 @@ class CAdvanceFilter_2BRule(IAdvanceFilterBase):
         ret['最低收盘价日期'] = min_row_closePrice[stock_Date]
         ret['最低收盘价'] = min_row_closePrice[stock_ClosePrice]
         return ret
+    
+    def KBody(self,df):
+        ret = {}
+        date = df.iloc[-1][stock_Date]
+        close1 = float(df.iloc[-1][stock_ClosePrice])
+        open1 = float(df.iloc[-1][stock_OpenPrice])
+        high1 = float(df.iloc[-1][stock_HighPrice])
+        low1 = float(df.iloc[-1][stock_LowerPrice])
+        close_yesterday = float(df.iloc[-1][stock_ClosePrice_Yesterday])
+        ret["%s_收盘价"%(date)] = close1
+        ret["%s_K线实体"%(date)] = (close1 -  open1)/close_yesterday*100
+        ret["%s_K线上影线"%(date)] = (high1 - max(close1, open1)) / close_yesterday *100
+        ret["%s_K线下影线"%(date)] = (min(close1,open1) - low1) / close_yesterday*100
+        return ret
         
     def FilterBy(self, df):
+        '''
+        前一日创新低， 当日低开，向下突破，突破失败，反抽超过次低点
+        '''
         if not self.ValidateData(df):
             return (False,)
         
         df1 = pd.DataFrame(df, columns=(stock_Date,stock_ClosePrice,stock_RSI_6),copy = True) 
         
         close1 = float(df.iloc[-1][stock_ClosePrice])
+        high1 = float(df.iloc[-1][stock_HighPrice])
+        close_yesterday = float(df.iloc[-1][stock_ClosePrice_Yesterday])
+        
         close2 = float(df.iloc[-2][stock_ClosePrice])
         open2 = float(df.iloc[-2][stock_OpenPrice])
         if close1 < open2:
@@ -74,11 +94,11 @@ class CAdvanceFilter_2BRule(IAdvanceFilterBase):
             ret["1股票简称"] = df.iloc[-1][stock_Name]
             ret[self.filterName] = "YES"
             ret["%s_涨跌幅%%"%(date)] = df.iloc[-1][stock_ZhangDieFu]
-            ret["%s_振幅%%"%(date)] = (float(df.iloc[-1][stock_HighPrice]) - float(df.iloc[-1][stock_LowerPrice]))/float(df.iloc[-1][stock_ClosePrice_Yesterday])*100
+            ret["%s_振幅%%"%(date)] = (high1 - low1)/close_yesterday*100
             ret["%s_量比"%(date)] = float(df.iloc[-1][stock_Volumn_Ratio])
-            ret["%s_收盘价"%(date)] = float(df.iloc[-1][stock_ClosePrice])
-            ret['昨日收盘价'] = float(df.iloc[-2][stock_ClosePrice])
             res = self.RSI(df[-self.days:])
+            ret.update(res)
+            res = self.KBody(df)
             ret.update(res)
             return (True,ret)
     
