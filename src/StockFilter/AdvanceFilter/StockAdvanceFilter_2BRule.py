@@ -37,6 +37,24 @@ class CAdvanceFilter_2BRule(IAdvanceFilterBase):
     
         return True
     
+    def HasZhangTing(self,df, percentage, N):
+        ret = {}
+        key = '最近%s天大于%s天数'%(N,percentage)
+        aa = (df.ix[-N:][stock_ZhangDieFu] > percentage)
+        t = df.loc[aa]
+        ret[key] = t.shape[0]
+        print(ret)
+        return ret
+    
+    def isST(self,df):
+        res = {}
+        key = "是否ST"
+        if df.iloc[-1][stock_Name].find("ST") != -1:
+            res[key] = "是"
+        else:
+            res[key] = "否"
+        return res
+
     def RSI(self,df):
         index_Rsi6 = df[stock_RSI_6].idxmin()
         min_row_rsi6= df.loc[index_Rsi6]
@@ -99,6 +117,10 @@ class CAdvanceFilter_2BRule(IAdvanceFilterBase):
             res = self.RSI(df[-self.days:])
             ret.update(res)
             res = self.KBody(df)
+            ret.update(res)
+            res = self.HasZhangTing(df,percentage=9.9,N=30)
+            ret.update(res)
+            res = self.isST(df)
             ret.update(res)
             return (True,ret)
     

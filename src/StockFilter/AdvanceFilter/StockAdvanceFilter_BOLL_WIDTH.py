@@ -65,14 +65,11 @@ class CAdvanceFilter_BOLL_WIDTH(IAdvanceFilterBase):
     def _calcFlag(self,df):
         l1 = float(df.iloc[-1][stock_BOLLMid])
         l2 = float(df.iloc[-2][stock_BOLLMid])
-        l3 = float(df.iloc[-3][stock_BOLLMid])
         flag = 'UnKnown'
-        if l1 >= l2 >= l3:
+        if l1 > l2:
             flag = 'UP'
-        elif l1 <= l2 <= l3:
+        elif l1 < l2:
             flag = 'DOWN'
-        else:
-            flag = 'UnKnown'
         
         return flag
     
