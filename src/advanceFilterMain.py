@@ -23,10 +23,14 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_2BRule import CAdvanceFilter_2
 from StockFilter.AdvanceFilter.StockAdvanceFilter_RSI_BeiLi import CAdvanceFilter_RSI_BeiLi
 
 def __advanceFilter(filter_):
+    message = 'start do job with filter:%s '%(filter_.filterName)
+    print(message)
     srcFolder = GetMergedFolder()
     folder_dest = GetAdvanceFilterFolder()
     mgr = CAdvanceFilterMgr()
     mgr.FilterFolder(srcFolder, filter_ ,folder_dest)
+    message = 'end job with filter:%s '%(filter_.filterName)
+    print(message)
 
 def __advanceFilterEveryDay(filter_):
     srcFolder = GetMergedFolder()
@@ -168,9 +172,9 @@ def AdvanceFilterTest():
     advanceMgr.FilterFolder(folder, outFolder, filterName)
 
 if __name__ == '__main__':
-#     DoAdvanceFilterMain()
+    DoAdvanceFilterMain()
     #MergeAllResult()
-    Test()
+#     Test()
 #     DoAdvanceFilterEx()
     #AdvanceFilterTest()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)

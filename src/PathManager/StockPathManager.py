@@ -4,6 +4,7 @@ Created on May 7, 2019
 @author: mac
 '''
 import os
+from datetime import date
 
 rawPath = '../data/rawData'
 outPath = '%s/../output/'%(rawPath)
@@ -44,6 +45,13 @@ def CreateAllFolder():
 
 def getFolder(folder):
     path = os.path.abspath(folder)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
+
+def getFolderWithDate(folder):
+    folderWithDate = '%s/%s/'%(folder,date.today())
+    path = os.path.abspath(folderWithDate)
     if not os.path.exists(path):
         os.makedirs(path)
     return path
@@ -89,13 +97,13 @@ def GetMergedFolder():
     return getFolder(mergedPath)
 
 def GetAdvanceFilterFolder():
-    return getFolder(advanceFilterPath)
+    return getFolderWithDate(advanceFilterPath)
 
 def GetAdvanceFilterExFolder():
-    return getFolder(advanceFilterExPath)
+    return getFolderWithDate(advanceFilterExPath)
 
 def GetCombinedFilterFolder():
-    return getFolder(combinedFilterPath)
+    return getFolderWithDate(combinedFilterPath)
 
 if __name__ == '__main__':
     CreateAllFolder()

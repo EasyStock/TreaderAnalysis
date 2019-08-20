@@ -54,6 +54,15 @@ class CAdvanceFilter_2BRule(IAdvanceFilterBase):
         else:
             res[key] = "否"
         return res
+    
+    def isOpenLowerThanYesterdayClose(self,df):
+        res = {}
+        key = "是否低开"
+        if float(df.iloc[-1][stock_OpenPrice]) < float(df.iloc[-1][stock_ClosePrice_Yesterday]):
+            res[key] = "是"
+        else:
+            res[key] = "否"
+        return res 
 
     def RSI(self,df):
         index_Rsi6 = df[stock_RSI_6].idxmin()
@@ -121,6 +130,8 @@ class CAdvanceFilter_2BRule(IAdvanceFilterBase):
             res = self.HasZhangTing(df,percentage=9.9,N=30)
             ret.update(res)
             res = self.isST(df)
+            ret.update(res)
+            res = self.isOpenLowerThanYesterdayClose(df)
             ret.update(res)
             return (True,ret)
     
