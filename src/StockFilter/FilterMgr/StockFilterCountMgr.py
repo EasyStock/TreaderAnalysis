@@ -21,6 +21,8 @@ class CStockFilterCountMgr(object):
         filterName = srcFolder[srcFolder.rfind('/')+1:]
         res[filterName] = {}
         for fileName in filenames:
+            if fileName.find(".DS_Store")!=-1:
+                continue
             fullName = os.path.join(srcFolder, fileName)
             date = fullName[fullName.rfind('/')+1: fullName.rfind('.')]
             io = CStockItemIO()
@@ -35,6 +37,8 @@ class CStockFilterCountMgr(object):
         dfs = []
         for fileName in  filenames:
             srcFolder = u'%s/%s' %(foler, fileName)
+            if srcFolder.find('.DS_Store') != -1:
+                continue
             try:
                 df = self.AnalysisOneFoler(srcFolder)
                 dfs.append(df)

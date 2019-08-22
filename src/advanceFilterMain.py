@@ -111,7 +111,7 @@ def DoAdvanceFilter():
     filter9 =  CAdvanceFilter_BigVolumn(40, 3)
     __advanceFilter(filter9)
     
-    filter10 = CAdvanceFilter_2BRule(40)
+    filter10 = CAdvanceFilter_2BRule(60)
     __advanceFilter(filter10)
     
     filter11= CAdvanceFilter_RSI_BeiLi(40)
@@ -155,7 +155,7 @@ def Test():
 #     filter9 =  CAdvanceFilter_BigVolumn(40, 3)
 #     __advanceFilter(filter9)
 #     
-    filter10 = CAdvanceFilter_2BRule(40)
+    filter10 = CAdvanceFilter_2BRule(60)
     __advanceFilter(filter10)
     
 #     filter11= CAdvanceFilter_RSI_BeiLi(40)
@@ -172,9 +172,9 @@ def AdvanceFilterTest():
     advanceMgr.FilterFolder(folder, outFolder, filterName)
 
 if __name__ == '__main__':
-    DoAdvanceFilterMain()
+#     DoAdvanceFilterMain()
     #MergeAllResult()
-#     Test()
+    Test()
 #     DoAdvanceFilterEx()
     #AdvanceFilterTest()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)

@@ -32,6 +32,7 @@ def Filter_Folder(filter_):
     outFolder = GetFilterFolderWithFilterName(filter_.filterName)
     filenames=os.listdir(srcfolder)
     mgr = CStockFilterMgr()
+    filenames = filenames[-3:]
     for xlsxFile in filenames:
         if xlsxFile.find('.xlsx') == -1:
             continue
