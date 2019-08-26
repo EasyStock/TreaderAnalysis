@@ -25,6 +25,8 @@ class CAdvanceFilter_BigVolumn(IAdvanceFilterBase):
             day = float(df.iloc[-1][stock_Days])
             if day < self.day+10:
                 return False
+            if df.shape[0] < self.day+10:
+                return False
         except:
             pass
 
@@ -56,7 +58,7 @@ class CAdvanceFilter_BigVolumn(IAdvanceFilterBase):
         
         if float(df.iloc[-1][stock_Volumn_Ratio]) < self.volumn_ratio:
             return (False,)
-        
+
         big, small = self._getClosePriceRatio(df)
     
         ret = {}

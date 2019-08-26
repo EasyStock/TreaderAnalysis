@@ -111,7 +111,7 @@ def DoAdvanceFilter():
     filter9 =  CAdvanceFilter_BigVolumn(40, 3)
     __advanceFilter(filter9)
     
-    filter10 = CAdvanceFilter_2BRule(60)
+    filter10 = CAdvanceFilter_2BRule(40)
     __advanceFilter(filter10)
     
     filter11= CAdvanceFilter_RSI_BeiLi(40)
@@ -152,11 +152,11 @@ def Test():
 #     filter8 = CAdvanceFilter_NewHigh(5)
 #     __advanceFilter(filter8)
     
-#     filter9 =  CAdvanceFilter_BigVolumn(40, 3)
-#     __advanceFilter(filter9)
-#     
-    filter10 = CAdvanceFilter_2BRule(60)
-    __advanceFilter(filter10)
+    filter9 =  CAdvanceFilter_BigVolumn(40, 3)
+    __advanceFilter(filter9)
+     
+#     filter10 = CAdvanceFilter_2BRule(60)
+#     __advanceFilter(filter10)
     
 #     filter11= CAdvanceFilter_RSI_BeiLi(40)
 #     __advanceFilter(filter11)
