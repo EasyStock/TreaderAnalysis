@@ -20,12 +20,12 @@ def RegressionTwo():
     
     
 def Regression():
-    srcFile = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/多日过滤Ex/2019-08-20/BOLL带宽_2019-08-20.xlsx'
-    destFile = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/每日数据/2019-08-26.xlsx'
-    destFile1 = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/BOLL带宽_2019-08-20.xlsx'
+    srcFile = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/多日过滤/2019-08-21/突破2B失败_反弹_2019-08-21.xlsx'
+    destFile = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/每日数据/2019-08-28.xlsx'
+    destFile1 = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/突破2B失败_反弹_20192019-08-21.xlsx'
     RegressionTest(destFile, srcFile,destFile1)
 
     
 if __name__ == '__main__':
-    #Regression()
-    RegressionTwo()
+    Regression()
+    #RegressionTwo()

@@ -78,6 +78,7 @@ class CAdvanceFilter_ShortDistance(IAdvanceFilterBase):
             ret['最后一天量比'] = float(df1.iloc[-1][stock_Volumn_Ratio])
             ret['到MA60的距离'] = float(df1.iloc[-1][stock_DistanceMA60])
             ret['到MA5的距离'] = float(df1.iloc[-1][stock_DistanceMA5])
+            ret['到MA20的距离'] = float(df1.iloc[-1][stock_DistanceMA20])
             ret['到BOLL上轨距离'] = float(df1.iloc[-1][stock_CLOSE_TO_BOLLUP])
             ret['最后三天涨幅'] = zhangDieFuLast3 
             key = '%s收盘价'%(df.iloc[-1][stock_Date])

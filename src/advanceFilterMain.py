@@ -21,6 +21,7 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_NewHigh import CAdvanceFilter_
 from StockFilter.AdvanceFilter.StockAdvanceFilter_Big_Volumn import CAdvanceFilter_BigVolumn
 from StockFilter.AdvanceFilter.StockAdvanceFilter_2BRule import CAdvanceFilter_2BRule
 from StockFilter.AdvanceFilter.StockAdvanceFilter_RSI_BeiLi import CAdvanceFilter_RSI_BeiLi
+from StockFilter.AdvanceFilter.StockAdvanceFilter_OpenEqualLower import CAdvanceFilter_OpenEqualLower
 
 def __advanceFilter(filter_):
     message = 'start do job with filter:%s '%(filter_.filterName)
@@ -152,14 +153,17 @@ def Test():
 #     filter8 = CAdvanceFilter_NewHigh(5)
 #     __advanceFilter(filter8)
     
-    filter9 =  CAdvanceFilter_BigVolumn(40, 3)
-    __advanceFilter(filter9)
+#     filter9 =  CAdvanceFilter_BigVolumn(40, 3)
+#     __advanceFilter(filter9)
      
 #     filter10 = CAdvanceFilter_2BRule(60)
 #     __advanceFilter(filter10)
     
 #     filter11= CAdvanceFilter_RSI_BeiLi(40)
 #     __advanceFilter(filter11)
+
+    filter12 = CAdvanceFilter_OpenEqualLower()
+    __advanceFilter(filter12)
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()
