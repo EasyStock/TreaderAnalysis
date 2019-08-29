@@ -9,7 +9,7 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_BOLL_WIDTH import CAdvanceFilt
 from StockFilter.AdvanceFilter.StockAdvanceFilter_Red3 import CAdvanceFilter_Red3
 from StockFilter.FilterMgr.StockAdvanceFilterMgr import CAdvanceFilterMgr
 from PathManager.StockPathManager import GetMergedFolder, GetAdvanceFilterFolder,\
-    GetRawDataFolder, GetOutDataFolder, GetAdvanceFilterExFolder
+    GetRawDataFolder_Stock, GetOutDataFolder, GetAdvanceFilterExFolder
 import os
 import pandas as pd
 from StockFilter.AdvanceFilter.StockAdvanceFilter_ShortDistance import CAdvanceFilter_ShortDistance
@@ -88,7 +88,7 @@ def __GroupMergeFiles():
     return res
         
 def MergeAllResult():
-    folder_dest= GetRawDataFolder()
+    folder_dest= GetRawDataFolder_Stock()
     groupedFiles = __GroupMergeFiles()
     for date in groupedFiles:
         res = pd.concat(groupedFiles[date], axis=0,join='outer',sort=False)

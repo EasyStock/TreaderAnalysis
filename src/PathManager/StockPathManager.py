@@ -7,15 +7,22 @@ import os
 from datetime import date
 
 rawPath = '../data/rawData'
+rawStockPath = '%s/股票/'%(rawPath)
+rawIndexBanKuaiPath = '%s/板块指数/'%(rawPath)
 outPath = '%s/../output/'%(rawPath)
-dailyData = '%s/每日数据/'%(outPath)
-analysisPath = '%s/分析/'%(outPath)
-filterPath = '%s/过滤/'%(outPath)
-SummaryPath = '%s/汇总/'%(outPath)
-mergedPath = '%s/合并/'%(outPath)
-advanceFilterPath = '%s/多日过滤/'%(outPath)
-advanceFilterExPath = '%s/多日过滤Ex/'%(outPath)
-combinedFilterPath = '%s/组合过滤/'%(outPath)
+outStockPath = '%s/股票/'%(outPath)
+outIndexBanKuaiPath = '%s/板块指数/'%(outPath)
+
+dailyData = '%s/每日数据/'%(outStockPath)
+dailyData_Index_BanKuai = '%s/每日数据/'%(outIndexBanKuaiPath)
+
+analysisPath = '%s/分析/'%(outStockPath)
+filterPath = '%s/过滤/'%(outStockPath)
+SummaryPath = '%s/汇总/'%(outStockPath)
+mergedPath = '%s/合并/'%(outStockPath)
+advanceFilterPath = '%s/多日过滤/'%(outStockPath)
+advanceFilterExPath = '%s/多日过滤Ex/'%(outStockPath)
+combinedFilterPath = '%s/组合过滤/'%(outStockPath)
 
 analysisBanKuaiPath = '%s/板块分析/'%(analysisPath)
 analysisBanKuaiPath_Repeatable = '%s/板块分析_可重复/'%(analysisPath)
@@ -25,7 +32,11 @@ analysisBanKuaiSummaryPath_Repeatable = '%s/板块汇总_可重复/'%(SummaryPat
 
 
 allFolder = (rawPath,
+             rawStockPath,
+             rawIndexBanKuaiPath,
              outPath,
+             outStockPath,
+             outIndexBanKuaiPath,
              dailyData,
              analysisPath,
              filterPath,
@@ -66,8 +77,17 @@ def getFolderWithFilter(folder, filterName):
 def GetRawDataFolder():
     return getFolder(rawPath)
 
+def GetRawDataFolder_Stock():
+    return getFolder(rawStockPath)
+
+def GetRawDataFolder_Index_BanKuai():
+    return getFolder(rawIndexBanKuaiPath)
+
 def GetDailyDataFolder():
     return getFolder(dailyData)
+
+def GetDailyDataFolder_Index_BanKuai():
+    return getFolder(dailyData_Index_BanKuai)
 
 def GetOutDataFolder():
     return getFolder(outPath)
@@ -107,7 +127,7 @@ def GetCombinedFilterFolder():
 
 if __name__ == '__main__':
     CreateAllFolder()
-#     print(GetRawDataFolder())
+#     print(GetRawDataFolder_Stock())
 #     print(GetOutDataFolder())
 #     print(GetAnalysisDataFolder())
 #     print(GetAnalysisBanKuaiFolder())

@@ -3,7 +3,7 @@ Created on May 6, 2019
 
 @author: mac
 '''
-from PathManager.StockPathManager import GetRawDataFolder, GetDailyDataFolder, GetMergedFolder
+from PathManager.StockPathManager import GetRawDataFolder_Stock, GetDailyDataFolder, GetMergedFolder
 import os
 from StockDataItemIO.StockItemIO import CStockItemIO
 from StockMerge.MergeStock import MergeStockMgr
@@ -13,7 +13,7 @@ from thresholdCalcMgr import CalcThreshold
 from CombinedFilterMain import CombinedFilteMain
 
 def ConverHTMLToXlSX():
-    folder = GetRawDataFolder()
+    folder = GetRawDataFolder_Stock()
     outFolder = GetDailyDataFolder()
     filenames=os.listdir(folder)
     for htmlFile in filenames:
