@@ -59,6 +59,7 @@ class CStockItemTemplate(object):
         self.stockInfo[stock_GaiNian] = None
         self.stockInfo[stock_Days] = None
         self.stockInfo[stock_XinTai] = None
+        self.stockInfo[stock_classify] = None
         
     def __str__(self):
         return self.stockInfo.__str__()

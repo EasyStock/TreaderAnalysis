@@ -68,3 +68,8 @@ stock_DistanceMA60 = u'股价距离季线距离'
 stock_DistanceMA120 = u'股价距离半年线距离'
 stock_DistanceMA240 = u'股价距离年线距离'
 
+stock_classify = '市值分类'
+stock_classify_low = '小盘股'
+stock_classify_min = '中盘股'
+stock_classify_high = '大盘股'
+stock_classify_super_high = '超级大盘股'

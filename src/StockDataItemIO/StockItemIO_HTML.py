@@ -186,6 +186,24 @@ class CStockItemIO_HTML(object):
         except:
             _dict[stock_DISTANCE_MA_MID] = '--'
     
+    def __classify(self,_dict):
+        if stock_ShiZhi not in _dict:
+            _dict[stock_classify] = '--'
+        try:
+            shizhi = float(_dict[stock_ShiZhi])
+            if shizhi > 1000*100000000:
+                _dict[stock_classify] = stock_classify_super_high
+            elif shizhi > 500*100000000:
+                _dict[stock_classify] = stock_classify_high
+            elif shizhi > 200*100000000:
+                _dict[stock_classify] = stock_classify_min
+            else:
+                _dict[stock_classify] = stock_classify_low
+
+        except:
+            _dict[stock_classify] = '--'
+        
+        
     def __calcDistanceOfMa_Long(self,_dict):
         if stock_MA5 not in _dict:
             _dict[stock_DISTANCE_MA_LONG] = '--'
@@ -332,7 +350,7 @@ class CStockItemIO_HTML(object):
         self.__calcDistanceOfMA_Short(item_info)
         self.__calcDistanceOfMA_Mid(item_info)
         self.__calcAllGaiLiRatio(item_info)
-        
+        self.__classify(item_info)
         item = CStockItemBase()
         item.initWithDict(item_info)
         return item
