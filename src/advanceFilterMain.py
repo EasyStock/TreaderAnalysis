@@ -22,6 +22,9 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_Big_Volumn import CAdvanceFilt
 from StockFilter.AdvanceFilter.StockAdvanceFilter_2BRule import CAdvanceFilter_2BRule
 from StockFilter.AdvanceFilter.StockAdvanceFilter_RSI_BeiLi import CAdvanceFilter_RSI_BeiLi
 from StockFilter.AdvanceFilter.StockAdvanceFilter_OpenEqualLower import CAdvanceFilter_OpenEqualLower
+from StockFilter.AdvanceFilter.StockAdvanceFilter_YunXian import CAdvanceFilter_YunXian
+from StockFilter.AdvanceFilter.StockAdvanceFilter_AttackDay import CAdvanceFilter_AttackDay
+from StockFilter.AdvanceFilter.StockAdvanceFilter_AYa import CAdvanceFilter_AYa
 
 def __advanceFilter(filter_):
     message = 'start do job with filter:%s '%(filter_.filterName)
@@ -162,8 +165,18 @@ def Test():
 #     filter11= CAdvanceFilter_RSI_BeiLi(40)
 #     __advanceFilter(filter11)
 
-    filter12 = CAdvanceFilter_OpenEqualLower()
-    __advanceFilter(filter12)
+#     filter12 = CAdvanceFilter_OpenEqualLower()
+#     __advanceFilter(filter12)
+
+#     filter13 = CAdvanceFilter_YunXian()
+#     __advanceFilter(filter13)
+    
+#     filter14 = CAdvanceFilter_AttackDay()
+#     __advanceFilter(filter14)
+    
+    filter15 = CAdvanceFilter_AYa()
+    __advanceFilter(filter15)
+    
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()
