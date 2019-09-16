@@ -168,11 +168,11 @@ def Test():
 #     filter12 = CAdvanceFilter_OpenEqualLower()
 #     __advanceFilter(filter12)
 
-#     filter13 = CAdvanceFilter_YunXian()
-#     __advanceFilter(filter13)
-    
-#     filter14 = CAdvanceFilter_AttackDay()
-#     __advanceFilter(filter14)
+    filter13 = CAdvanceFilter_YunXian()
+    __advanceFilter(filter13)
+     
+    filter14 = CAdvanceFilter_AttackDay()
+    __advanceFilter(filter14)
     
     filter15 = CAdvanceFilter_AYa()
     __advanceFilter(filter15)

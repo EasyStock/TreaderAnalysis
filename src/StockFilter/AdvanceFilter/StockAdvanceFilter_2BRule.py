@@ -71,8 +71,6 @@ class CAdvanceFilter_2BRule(AdvanceFilterCommon):
             ret.update(res)
             res = self.HasZhangTing(df,percentage=9.9,N=30)
             ret.update(res)
-            res = self.isST(df)
-            ret.update(res)
             res = self.isOpenLowerThanYesterdayClose(df)
             ret.update(res)
             res = self.shiZhi(df)
