@@ -6,7 +6,8 @@ Created on Apr 15, 2019
 from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
 from StockDataItem.StockItemDef import stock_ZhangDieFu, stock_Name,\
     stock_ClosePrice_Yesterday, stock_OpenPrice, stock_ShiZhi, stock_RSI_6,\
-    stock_ClosePrice, stock_Date, stock_HighPrice, stock_LowerPrice, stock_Days
+    stock_ClosePrice, stock_Date, stock_HighPrice, stock_LowerPrice, stock_Days,\
+    stock_MA5, stock_MA20, stock_MA10
 
 class AdvanceFilterCommon(IAdvanceFilterBase):
     def __init__(self):
@@ -33,6 +34,42 @@ class AdvanceFilterCommon(IAdvanceFilterBase):
         res = {}
         key = "是否低开"
         if float(df.iloc[-1][stock_OpenPrice]) < float(df.iloc[-1][stock_ClosePrice_Yesterday]):
+            res[key] = "是"
+        else:
+            res[key] = "否"
+        return res
+
+    def isPositive(self,df):
+        res = {}
+        key = "是否阳线"
+        if float(df.iloc[-1][stock_OpenPrice]) < float(df.iloc[-1][stock_ClosePrice]):
+            res[key] = "是"
+        else:
+            res[key] = "否"
+        return res
+
+    def isGreaterThan5MA(self,df):
+        res = {}
+        key = "是否大于MA5"
+        if float(df.iloc[-1][stock_ClosePrice]) > float(df.iloc[-1][stock_MA5]):
+            res[key] = "是"
+        else:
+            res[key] = "否"
+        return res
+
+    def isGreaterThan10MA(self,df):
+        res = {}
+        key = "是否大于MA10"
+        if float(df.iloc[-1][stock_ClosePrice]) > float(df.iloc[-1][stock_MA10]):
+            res[key] = "是"
+        else:
+            res[key] = "否"
+        return res
+    
+    def isGreaterThan20MA(self,df):
+        res = {}
+        key = "是否大于中轨"
+        if float(df.iloc[-1][stock_ClosePrice]) > float(df.iloc[-1][stock_MA20]):
             res[key] = "是"
         else:
             res[key] = "否"
@@ -69,7 +106,7 @@ class AdvanceFilterCommon(IAdvanceFilterBase):
         low1 = float(df.iloc[-1][stock_LowerPrice])
         close_yesterday = float(df.iloc[-1][stock_ClosePrice_Yesterday])
         ret["%s_收盘价"%(date)] = close1
-        ret["%s_K线实体"%(date)] = (close1 -  open1)/close_yesterday*100
+        ret["%s_K线实体"%(date)] = abs((close1 -  open1))/close_yesterday*100
         ret["%s_K线上影线"%(date)] = (high1 - max(close1, open1)) / close_yesterday *100
         ret["%s_K线下影线"%(date)] = (min(close1,open1) - low1) / close_yesterday*100
         return ret

@@ -25,6 +25,7 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_OpenEqualLower import CAdvance
 from StockFilter.AdvanceFilter.StockAdvanceFilter_YunXian import CAdvanceFilter_YunXian
 from StockFilter.AdvanceFilter.StockAdvanceFilter_AttackDay import CAdvanceFilter_AttackDay
 from StockFilter.AdvanceFilter.StockAdvanceFilter_AYa import CAdvanceFilter_AYa
+from StockFilter.AdvanceFilter.StockAdvanceFilter_ShadowUp import CAdvanceFilter_ShadowUp
 
 def __advanceFilter(filter_):
     message = 'start do job with filter:%s '%(filter_.filterName)
@@ -121,6 +122,18 @@ def DoAdvanceFilter():
     filter11= CAdvanceFilter_RSI_BeiLi(40)
     __advanceFilter(filter11)
     
+    filter13 = CAdvanceFilter_YunXian()
+    __advanceFilter(filter13)
+     
+    filter14 = CAdvanceFilter_AttackDay()
+    __advanceFilter(filter14)
+    
+    filter15 = CAdvanceFilter_AYa()
+    __advanceFilter(filter15)
+    
+    filter16 = CAdvanceFilter_ShadowUp(3.0)
+    __advanceFilter(filter16)
+    
 def DoAdvanceFilterMain():
     DoAdvanceFilter()
     DoAdvanceFilterEx()
@@ -168,15 +181,17 @@ def Test():
 #     filter12 = CAdvanceFilter_OpenEqualLower()
 #     __advanceFilter(filter12)
 
-    filter13 = CAdvanceFilter_YunXian()
-    __advanceFilter(filter13)
-     
-    filter14 = CAdvanceFilter_AttackDay()
-    __advanceFilter(filter14)
+#     filter13 = CAdvanceFilter_YunXian()
+#     __advanceFilter(filter13)
+#      
+#     filter14 = CAdvanceFilter_AttackDay()
+#     __advanceFilter(filter14)
+#     
+#     filter15 = CAdvanceFilter_AYa()
+#     __advanceFilter(filter15)
     
-    filter15 = CAdvanceFilter_AYa()
-    __advanceFilter(filter15)
-    
+    filter16 = CAdvanceFilter_ShadowUp(3.0)
+    __advanceFilter(filter16)
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()
