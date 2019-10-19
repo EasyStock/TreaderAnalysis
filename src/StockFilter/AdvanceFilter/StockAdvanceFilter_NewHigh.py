@@ -5,7 +5,7 @@ Created on Jun 10, 2019
 '''
 from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
 from StockDataItem.StockItemDef import stock_Days,stock_Date, stock_Name,\
-    stock_ClosePrice
+    stock_ClosePrice, stock_GaiNian
 import pandas as pd
 
 class CAdvanceFilter_NewHigh(IAdvanceFilterBase):
@@ -55,6 +55,7 @@ class CAdvanceFilter_NewHigh(IAdvanceFilterBase):
         ret["0日期"] = df.iloc[-1][stock_Date]
         ret["1股票简称"] = df.iloc[-1][stock_Name]
         ret[self.filterName] = "YES"
+        ret["概念板块"] = df.iloc[-1][stock_GaiNian]
         key = u'%s_天数' %(self.filterName)
         ret[key] = N
         return (True,ret)
