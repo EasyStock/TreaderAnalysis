@@ -3,18 +3,19 @@ Created on Jun 10, 2019
 
 @author: mac
 '''
-from StockFilter.AdvanceFilter.AdvanceFilterBase import IAdvanceFilterBase
+from StockFilter.AdvanceFilter.AdvanceFilterCommon import AdvanceFilterCommon
 from StockDataItem.StockItemDef import stock_Days,stock_Date, stock_Name,\
     stock_ClosePrice, stock_GaiNian
 import pandas as pd
 
-class CAdvanceFilter_NewHigh(IAdvanceFilterBase):
+
+class CAdvanceFilter_NewHigh(AdvanceFilterCommon):
 
     def __init__(self,days):
         '''
         params None
         '''
-        IAdvanceFilterBase.__init__(self, None)
+        AdvanceFilterCommon.__init__(self)
         self.filterName = u'%s日新高'%(days)
         self.FilterDescribe = u'创%s日新高'%(days)
         self.param = days
@@ -38,6 +39,8 @@ class CAdvanceFilter_NewHigh(IAdvanceFilterBase):
         if not self.ValidateData(df):
             return (False,)
         
+        if self.isST(df):
+            return (False,)
         
         df1 = pd.DataFrame(df, columns=(stock_Date,stock_ClosePrice),copy = True)
         rows = df1.shape[0]
