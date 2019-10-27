@@ -13,4 +13,4 @@ def CalcPercentages(low, high):
 
 
 if __name__ == '__main__':
-    CalcPercentages(2733.92, 3048.48)
+    CalcPercentages(32.84, 42.08)
