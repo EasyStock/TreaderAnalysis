@@ -75,13 +75,14 @@ class CStockAdvanceFilter_LineTurning(object):
 
 
 if __name__ == '__main__':
-    fileName = u'/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/002241.SZ.xlsx'
+    fileName = u'/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/300661.SZ.xlsx'
     df = pd.read_excel(fileName,index_col=0)
-    df1 = pd.DataFrame(df, index = df.index, columns=('10MA',),copy = True)
+    df1 = pd.DataFrame(df, index = df.index, columns=('30MA',),copy = True)
     #print(df1)
     up = CStockAdvanceFilter_LineTurning()
     #res = up.FilterBy(df1)
     # print(res[0])
     # print(res[1])
 
-    up.GetAllTurnPoints(df1)
+    ret = up.GetAllTurnPoints(df1)
+    print(ret)
