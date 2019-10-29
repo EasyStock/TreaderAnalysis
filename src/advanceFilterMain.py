@@ -110,7 +110,10 @@ def DoAdvanceFilter():
 #     advanceFilterAll()
     filter3 = CAdvanceFilter_MidDistance(0.8)
     __advanceFilter(filter3)
-    
+
+    filter4 = CAdvanceFilter_NewHigh(90)
+    __advanceFilter(filter4)
+
     filter8 = CAdvanceFilter_NewHigh(5)
     __advanceFilter(filter8)
     
@@ -134,7 +137,7 @@ def DoAdvanceFilter():
     
     filter16 = CAdvanceFilter_ShadowUp(3.0)
     __advanceFilter(filter16)
-    
+
 def DoAdvanceFilterMain():
     DoAdvanceFilter()
     DoAdvanceFilterEx()
@@ -159,8 +162,8 @@ def Test():
 #     __advanceFilter(filter2)
 #     filter3 = CAdvanceFilter_MidDistance(0.8)
 #     __advanceFilter(filter3)
-    filter4 = CAdvanceFilter_NewHigh(90)
-    __advanceFilter(filter4)
+    # filter4 = CAdvanceFilter_NewHigh(90)
+    # __advanceFilter(filter4)
 #     filter5 = CAdvanceFilter_NewHigh(50)
 #     __advanceFilter(filter5)
 #     filter6 = CAdvanceFilter_NewHigh(30)
@@ -194,7 +197,7 @@ def Test():
     filter16 = CAdvanceFilter_ShadowUp(3.0)
     __advanceFilter(filter16)
 
-    filter17 = CAdvanceFilter_LineTurnUp(0)
+    filter17 = CAdvanceFilter_LineTurnUp()
     __advanceFilter(filter17)
     
 

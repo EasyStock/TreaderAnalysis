@@ -20,6 +20,7 @@ class CAdvanceFilter_LineTurnUp(IAdvanceFilterBase):
         IAdvanceFilterBase.__init__(self, None)
         self.filterName = u'20日均线向上并且值大于%s'%(threshold)
         self.FilterDescribe = u'20日均线向上并且值大于threshold'
+        self.threshold = threshold
         
     def ValidateData(self, df):
         try:
@@ -66,15 +67,20 @@ class CAdvanceFilter_LineTurnUp(IAdvanceFilterBase):
         if not self.ValidateData(df):
             return (False,)
         ret = {}
+        res = self.FilterMA(df, stock_MA20)
+        if res != None:
+            key_value = "%s最后转折点值" %(stock_MA20)
+            if(res[key_value] < self.threshold):
+                return (False,)
+            ret.update(res)
+        else:
+            return (False,)
+            
         res = self.FilterMA(df, stock_MA5)
         if res != None:
             ret.update(res)
         
         res = self.FilterMA(df, stock_MA10)
-        if res != None:
-            ret.update(res)
-
-        res = self.FilterMA(df, stock_MA20)
         if res != None:
             ret.update(res)
 
