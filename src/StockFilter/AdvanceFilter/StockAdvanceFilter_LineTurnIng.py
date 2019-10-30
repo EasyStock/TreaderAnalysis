@@ -7,10 +7,11 @@ import pandas as pd
 DIRECTION_UP = 'Up'
 DirectION_DOWN = 'Down'
 
-
 class CStockAdvanceFilter_LineTurning(object):
     def __init__(self):
-        pass
+        self.smoothedData = None
+        self.firstDerivativeData = None
+        self.firstDerivativeDataFrame = None
 
     def GetAllTurnPoints(self, data):
         if not isinstance(data,pd.DataFrame):
@@ -23,11 +24,12 @@ class CStockAdvanceFilter_LineTurning(object):
     
         firstCol = data.iloc[:,0]
         smoothedData = self.Smooth(firstCol)
+        self.smoothedData = smoothedData
         deri = self.FirstDerivative(smoothedData)
+        self.firstDerivativeData = deri.to_list()
         df = pd.DataFrame(deri.values, index= data.index)
+        self.firstDerivativeDataFrame = df
         lastDir = None
-        
-
         for i in range(1, size[0]-1):
             if df.iloc[i,0] >0 and df.iloc[i+1,0] > 0:
                 if lastDir is None or lastDir == DirectION_DOWN:
@@ -73,16 +75,20 @@ class CStockAdvanceFilter_LineTurning(object):
         
         return data.diff()
 
+def GetDerivativeDataWithStock(stockIDs):
+    folder = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/股票/合并/'
+    for stock in stockIDs:
+        fileName = u'%s%s.xlsx' % (folder, stock)
+        df = pd.read_excel(fileName,index_col=0)
+        df1 = pd.DataFrame(df, index = df.index, columns=('20MA',),copy = True)
+        up = CStockAdvanceFilter_LineTurning()
+        ret = up.GetAllTurnPoints(df1)
+        print("\n\n\n\n========================================")
+        print(stock, df["股票简称"][-1])
+        print(pd.DataFrame(ret))
+        print(up.firstDerivativeDataFrame.tail(5))
+
 
 if __name__ == '__main__':
-    fileName = u'/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/300661.SZ.xlsx'
-    df = pd.read_excel(fileName,index_col=0)
-    df1 = pd.DataFrame(df, index = df.index, columns=('30MA',),copy = True)
-    #print(df1)
-    up = CStockAdvanceFilter_LineTurning()
-    #res = up.FilterBy(df1)
-    # print(res[0])
-    # print(res[1])
-
-    ret = up.GetAllTurnPoints(df1)
-    print(ret)
+    stockIDs = ['300661.SZ',]
+    GetDerivativeDataWithStock(stockIDs)

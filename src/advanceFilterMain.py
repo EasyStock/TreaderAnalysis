@@ -194,8 +194,8 @@ def Test():
 #     filter15 = CAdvanceFilter_AYa()
 #     __advanceFilter(filter15)
     
-    filter16 = CAdvanceFilter_ShadowUp(3.0)
-    __advanceFilter(filter16)
+    # filter16 = CAdvanceFilter_ShadowUp(3.0)
+    # __advanceFilter(filter16)
 
     filter17 = CAdvanceFilter_LineTurnUp()
     __advanceFilter(filter17)
