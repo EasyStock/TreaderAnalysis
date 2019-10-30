@@ -138,6 +138,9 @@ def DoAdvanceFilter():
     filter16 = CAdvanceFilter_ShadowUp(3.0)
     __advanceFilter(filter16)
 
+    filter17 = CAdvanceFilter_LineTurnUp()
+    __advanceFilter(filter17)
+    
 def DoAdvanceFilterMain():
     DoAdvanceFilter()
     DoAdvanceFilterEx()

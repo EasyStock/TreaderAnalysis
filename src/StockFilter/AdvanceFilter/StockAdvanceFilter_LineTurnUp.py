@@ -89,10 +89,16 @@ class CAdvanceFilter_LineTurnUp(IAdvanceFilterBase):
 
         res = self.FilterMA(df, stock_MA5)
         if res != None:
+            key_value = "%s最后转折点值" %(stock_MA5)
+            if(res[key_value] < 0):
+                return (False,)
             ret.update(res)
         
         res = self.FilterMA(df, stock_MA10)
         if res != None:
+            key_value = "%s最后转折点值" %(stock_MA10)
+            if(res[key_value] < 0):
+                return (False,)
             ret.update(res)
 
         res = self.FilterMA(df, stock_MA30)

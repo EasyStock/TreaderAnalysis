@@ -90,5 +90,5 @@ def GetDerivativeDataWithStock(stockIDs):
 
 
 if __name__ == '__main__':
-    stockIDs = ['300661.SZ',]
+    stockIDs = ['600686.SH','600298.SH', '603722.SH','600779.SH','300014.SZ','002234.SZ']
     GetDerivativeDataWithStock(stockIDs)
