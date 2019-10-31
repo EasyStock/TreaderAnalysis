@@ -57,12 +57,12 @@ class CAdvanceFilter_LineTurnUp(IAdvanceFilterBase):
             key_date = "%s最后转折点日期" %(MA)
             key_direction = "%s最后转折点方向" %(MA)
             key_value = "%s最后转折点值" %(MA)
-            key_value_last = "%s最后值" %(MA)
+            #key_value_last = "%s最后值" %(MA)
 
             ret[key_date] = last['Date']
             ret[key_direction] = last['Direction']
             ret[key_value] = last['Value']
-            ret[key_value_last] = lineTurning.firstDerivativeData[-1]
+            #ret[key_value_last] = lineTurning.firstDerivativeData[-1]
 
         except:
             return None
@@ -80,8 +80,8 @@ class CAdvanceFilter_LineTurnUp(IAdvanceFilterBase):
         res = self.FilterMA(df, stock_MA20)
         if res != None:
             key_value = "%s最后转折点值" %(stock_MA20)
-            key_value_last = "%s最后值" %(stock_MA20)
-            if(res[key_value] < self.threshold) and (res[key_value_last] < self.threshold):
+            #key_value_last = "%s最后值" %(stock_MA20)
+            if(res[key_value] < self.threshold):#and (res[key_value_last] < self.threshold):
                 return (False,)
             ret.update(res)
         else:

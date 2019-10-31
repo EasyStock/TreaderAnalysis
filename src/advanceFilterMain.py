@@ -200,7 +200,7 @@ def Test():
     # filter16 = CAdvanceFilter_ShadowUp(3.0)
     # __advanceFilter(filter16)
 
-    filter17 = CAdvanceFilter_LineTurnUp()
+    filter17 = CAdvanceFilter_LineTurnUp(0.05)
     __advanceFilter(filter17)
     
 
