@@ -27,6 +27,8 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_AttackDay import CAdvanceFilte
 from StockFilter.AdvanceFilter.StockAdvanceFilter_AYa import CAdvanceFilter_AYa
 from StockFilter.AdvanceFilter.StockAdvanceFilter_ShadowUp import CAdvanceFilter_ShadowUp
 from StockFilter.AdvanceFilter.StockAdvanceFilter_LineTurnUp import CAdvanceFilter_LineTurnUp
+from StockFilter.AdvanceFilter.StockAdvanceFilter_Forecast_MA20 import CStockAdvanceFilter_Forecast_MA20
+
 
 def __advanceFilter(filter_):
     message = 'start do job with filter:%s '%(filter_.filterName)
@@ -200,9 +202,11 @@ def Test():
     # filter16 = CAdvanceFilter_ShadowUp(3.0)
     # __advanceFilter(filter16)
 
-    filter17 = CAdvanceFilter_LineTurnUp(0.05)
-    __advanceFilter(filter17)
-    
+    # filter17 = CAdvanceFilter_LineTurnUp(0.05)
+    # __advanceFilter(filter17)
+
+    filter18 = CStockAdvanceFilter_Forecast_MA20()
+    __advanceFilter(filter18)
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()
