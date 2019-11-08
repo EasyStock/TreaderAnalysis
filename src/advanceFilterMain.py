@@ -30,6 +30,15 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_LineTurnUp import CAdvanceFilt
 from StockFilter.AdvanceFilter.StockAdvanceFilter_Forecast_MA20 import CStockAdvanceFilter_Forecast_MA20
 
 
+def __FilterOneFile(filter_, fileName):
+    message = 'start do job with filter:%s '%(filter_.filterName)
+    print(message)
+    mgr = CAdvanceFilterMgr()
+    res = mgr.FilterFile(fileName, filter_)
+    print(res)
+    message = 'end job with filter:%s '%(filter_.filterName)
+    print(message)
+
 def __advanceFilter(filter_):
     message = 'start do job with filter:%s '%(filter_.filterName)
     print(message)
@@ -218,6 +227,13 @@ def AdvanceFilterTest():
     filterName = K_ADVANCE_FILTER_EX_BOLL_WIDTH
     advanceMgr.FilterFolder(folder, outFolder, filterName)
 
+def TestOneFileWithStockIDs(stockIDs,filter_):
+    folder = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/股票/合并/'
+    for stock in stockIDs:
+        fileName = u'%s%s.xlsx' % (folder, stock)
+        print(fileName)
+        __FilterOneFile(filter_,fileName)
+
 if __name__ == '__main__':
 #     DoAdvanceFilterMain()
     #MergeAllResult()
@@ -228,5 +244,8 @@ if __name__ == '__main__':
 #     __advanceFilter(filter3)
 #     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)
 #     __advanceFilterEveryDay(filter2)
+    # stockIDs = ['002271.SZ',]
+    # filter17 = CAdvanceFilter_LineTurnUp(0.05)
+    # TestOneFileWithStockIDs(stockIDs,filter17)
     
     

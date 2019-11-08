@@ -115,6 +115,5 @@ class CAdvanceFilter_LineTurnUp(IAdvanceFilterBase):
 
         return (True,ret)
 
-    
 if __name__ == '__main__':
     pass
