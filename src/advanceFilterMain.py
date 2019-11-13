@@ -248,8 +248,8 @@ if __name__ == '__main__':
 #     __advanceFilter(filter3)
 #     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)
 #     __advanceFilterEveryDay(filter2)
-    # stockIDs = ['002271.SZ',]
-    # filter17 = CAdvanceFilter_LineTurnUp(0.05)
+    # stockIDs = ['600600.SH',]
+    # filter17 = CStockAdvanceFilter_Forecast_MA(0.99,1.02)
     # TestOneFileWithStockIDs(stockIDs,filter17)
     
     

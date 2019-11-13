@@ -70,9 +70,6 @@ class CStockAdvanceFilter_Forecast_MA(IAdvanceFilterBase):
         return ret
 
     def _calcNewDataFrame(self, df ,percentage):
-        if not self._validateData(df):
-            return (False,)
-
         closePrice_last =float(df.iloc[-1][stock_ClosePrice])
         closePrice_last5 = float(df.iloc[-5][stock_ClosePrice])
         closePrice_last10 = float(df.iloc[-10][stock_ClosePrice])
@@ -95,15 +92,7 @@ class CStockAdvanceFilter_Forecast_MA(IAdvanceFilterBase):
         return df1
     
     def FilterByPercentage(self, df , percentage):
-        if not self._validateData(df):
-            return (False,)
         ret = {}
-        ret["A_日期"] = df.iloc[-1][stock_Date]
-        ret["B_股票简称"] = df.iloc[-1][stock_Name]
-        ret[self.filterName] = "YES"
-        ret['C_收盘价'] = df.iloc[-1][stock_ClosePrice]
-        ret['C_预测涨跌幅'] = percentage
-
         res = self.FilterMA(df, stock_MA20)
         if res != None:
             key_value = "E_%s最后转折点值" %(stock_MA20)
@@ -140,15 +129,24 @@ class CStockAdvanceFilter_Forecast_MA(IAdvanceFilterBase):
     def FilterBy(self, df):
         if not self._validateData(df):
             return (False,)
+        ret = {}
+        ret["A_日期"] = df.iloc[-1][stock_Date]
+        ret["B_股票简称"] = df.iloc[-1][stock_Name]
+        ret[self.filterName] = "YES"
+        ret['C_收盘价'] = df.iloc[-1][stock_ClosePrice]
 
         newDataFrame = self._calcNewDataFrame(df, self.percentageMin)
         res = self.FilterByPercentage(newDataFrame, self.percentageMin)
         if(res[0] == True):
-            return res
+            ret.update(res[1])
+            ret['C_预测涨跌幅'] = self.percentageMin
+            return (True,ret)
 
         res = self.FilterByPercentage(newDataFrame, self.percentageMax)
         if(res[0] == True):
-            return res 
+            ret.update(res[1])
+            ret['C_预测涨跌幅'] = self.percentageMax
+            return (True,ret)
         
         return (False,)
     
