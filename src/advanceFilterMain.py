@@ -28,6 +28,8 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_AYa import CAdvanceFilter_AYa
 from StockFilter.AdvanceFilter.StockAdvanceFilter_ShadowUp import CAdvanceFilter_ShadowUp
 from StockFilter.AdvanceFilter.StockAdvanceFilter_LineTurnUp import CAdvanceFilter_LineTurnUp
 from StockFilter.AdvanceFilter.StockAdvanceFilter_Forecast_MA20 import CStockAdvanceFilter_Forecast_MA20
+from StockFilter.AdvanceFilter.StockAdvanceFilter_Forecast_MA import CStockAdvanceFilter_Forecast_MA
+
 
 
 def __FilterOneFile(filter_, fileName):
@@ -125,17 +127,17 @@ def DoAdvanceFilter():
     filter4 = CAdvanceFilter_NewHigh(90)
     __advanceFilter(filter4)
 
-    filter8 = CAdvanceFilter_NewHigh(5)
-    __advanceFilter(filter8)
+    # filter8 = CAdvanceFilter_NewHigh(5)
+    # __advanceFilter(filter8)
     
-    filter9 =  CAdvanceFilter_BigVolumn(40, 3)
-    __advanceFilter(filter9)
+    # filter9 =  CAdvanceFilter_BigVolumn(40, 3)
+    # __advanceFilter(filter9)
     
-    filter10 = CAdvanceFilter_2BRule(40)
-    __advanceFilter(filter10)
+    # filter10 = CAdvanceFilter_2BRule(40)
+    # __advanceFilter(filter10)
     
-    filter11= CAdvanceFilter_RSI_BeiLi(40)
-    __advanceFilter(filter11)
+    # filter11= CAdvanceFilter_RSI_BeiLi(40)
+    # __advanceFilter(filter11)
     
     filter13 = CAdvanceFilter_YunXian()
     __advanceFilter(filter13)
@@ -214,8 +216,10 @@ def Test():
     # filter17 = CAdvanceFilter_LineTurnUp(0.05)
     # __advanceFilter(filter17)
 
-    filter18 = CStockAdvanceFilter_Forecast_MA20()
-    __advanceFilter(filter18)
+    # filter18 = CStockAdvanceFilter_Forecast_MA20()
+    # __advanceFilter(filter18)
+    filter19 = CStockAdvanceFilter_Forecast_MA(0.99,1.02)
+    __advanceFilter(filter19)
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()

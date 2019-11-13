@@ -54,9 +54,9 @@ class CAdvanceFilter_LineTurnUp(IAdvanceFilterBase):
                 return None
 
             last = res[-1]
-            key_date = "%s最后转折点日期" %(MA)
-            key_direction = "%s最后转折点方向" %(MA)
-            key_value = "%s最后转折点值" %(MA)
+            key_date = "D_%s最后转折点日期" %(MA)
+            key_direction = "F_%s最后转折点方向" %(MA)
+            key_value = "E_%s最后转折点值" %(MA)
             #key_value_last = "%s最后值" %(MA)
 
             ret[key_date] = last['Date']
@@ -72,14 +72,14 @@ class CAdvanceFilter_LineTurnUp(IAdvanceFilterBase):
         if not self.ValidateData(df):
             return (False,)
         ret = {}
-        ret["日期"] = df.iloc[-1][stock_Date]
-        ret["股票简称"] = df.iloc[-1][stock_Name]
+        ret["A_日期"] = df.iloc[-1][stock_Date]
+        ret["B_股票简称"] = df.iloc[-1][stock_Name]
         ret[self.filterName] = "YES"
-        ret['收盘价'] = df.iloc[-1][stock_ClosePrice]
+        ret['C_收盘价'] = df.iloc[-1][stock_ClosePrice]
         
         res = self.FilterMA(df, stock_MA20)
         if res != None:
-            key_value = "%s最后转折点值" %(stock_MA20)
+            key_value = "E_%s最后转折点值" %(stock_MA20)
             #key_value_last = "%s最后值" %(stock_MA20)
             if(res[key_value] < self.threshold):#and (res[key_value_last] < self.threshold):
                 return (False,)
@@ -89,20 +89,23 @@ class CAdvanceFilter_LineTurnUp(IAdvanceFilterBase):
 
         res = self.FilterMA(df, stock_MA5)
         if res != None:
-            key_value = "%s最后转折点值" %(stock_MA5)
+            key_value = "E_%s最后转折点值" %(stock_MA5)
             if(res[key_value] < 0):
                 return (False,)
             ret.update(res)
         
         res = self.FilterMA(df, stock_MA10)
         if res != None:
-            key_value = "%s最后转折点值" %(stock_MA10)
+            key_value = "E_%s最后转折点值" %(stock_MA10)
             if(res[key_value] < 0):
                 return (False,)
             ret.update(res)
 
         res = self.FilterMA(df, stock_MA30)
         if res != None:
+            key_value = "E_%s最后转折点值" %(stock_MA30)
+            if(res[key_value] < 0):
+                return (False,)
             ret.update(res)
 
         res = self.FilterMA(df, stock_MA60)
