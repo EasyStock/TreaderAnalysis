@@ -153,6 +153,9 @@ def DoAdvanceFilter():
 
     filter17 = CAdvanceFilter_LineTurnUp()
     __advanceFilter(filter17)
+
+    filter19 = CStockAdvanceFilter_Forecast_MA((0.99,1, 1.01, 1.03, 1.05, 1.07,1.099),0.05)
+    __advanceFilter(filter19)
     
 def DoAdvanceFilterMain():
     DoAdvanceFilter()
@@ -218,7 +221,7 @@ def Test():
 
     # filter18 = CStockAdvanceFilter_Forecast_MA20()
     # __advanceFilter(filter18)
-    filter19 = CStockAdvanceFilter_Forecast_MA(0.99,1.02)
+    filter19 = CStockAdvanceFilter_Forecast_MA((0.99,1, 1.01, 1.03, 1.05, 1.07,1.099),0.05)
     __advanceFilter(filter19)
 
 def AdvanceFilterTest():

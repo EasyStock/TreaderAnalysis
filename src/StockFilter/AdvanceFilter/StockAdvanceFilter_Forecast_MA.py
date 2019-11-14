@@ -13,15 +13,14 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_LineTurning import CStockAdvan
 
 class CStockAdvanceFilter_Forecast_MA(IAdvanceFilterBase):
 
-    def __init__(self,percentageMin = 0.98, percentageMax = 1.02,threshold = 0.05):
+    def __init__(self,percentages = (),threshold = 0.05):
         '''
         params threshold_min
         '''
         IAdvanceFilterBase.__init__(self,None)
-        self.filterName = u'预测均线%s ~ %s'%(percentageMin, percentageMax)
+        self.filterName = u'预测均线'
         self.FilterDescribe = u'预测均线 是否突破向上'
-        self.percentageMin = percentageMin
-        self.percentageMax = percentageMax
+        self.percentages = percentages
         self.threshold = threshold
         
     def _validateData(self, df):
@@ -135,18 +134,13 @@ class CStockAdvanceFilter_Forecast_MA(IAdvanceFilterBase):
         ret[self.filterName] = "YES"
         ret['C_收盘价'] = df.iloc[-1][stock_ClosePrice]
 
-        newDataFrame = self._calcNewDataFrame(df, self.percentageMin)
-        res = self.FilterByPercentage(newDataFrame, self.percentageMin)
-        if(res[0] == True):
-            ret.update(res[1])
-            ret['C_预测涨跌幅'] = self.percentageMin
-            return (True,ret)
-
-        res = self.FilterByPercentage(newDataFrame, self.percentageMax)
-        if(res[0] == True):
-            ret.update(res[1])
-            ret['C_预测涨跌幅'] = self.percentageMax
-            return (True,ret)
+        for percentage in self.percentages:
+            newDataFrame = self._calcNewDataFrame(df, percentage)
+            res = self.FilterByPercentage(newDataFrame, percentage)
+            if(res[0] == True):
+                ret.update(res[1])
+                ret['C_预测涨跌幅'] = percentage
+                return (True,ret)
         
         return (False,)
     
