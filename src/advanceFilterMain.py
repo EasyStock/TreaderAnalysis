@@ -154,7 +154,7 @@ def DoAdvanceFilter():
     filter17 = CAdvanceFilter_LineTurnUp()
     __advanceFilter(filter17)
 
-    filter19 = CStockAdvanceFilter_Forecast_MA((0.99,1, 1.01, 1.03, 1.05, 1.07,1.099),0.05)
+    filter19 = CStockAdvanceFilter_Forecast_MA([1 + x / 1000.0 for x in range(-30, 100, 5)],0.05)
     __advanceFilter(filter19)
     
 def DoAdvanceFilterMain():
@@ -221,7 +221,8 @@ def Test():
 
     # filter18 = CStockAdvanceFilter_Forecast_MA20()
     # __advanceFilter(filter18)
-    filter19 = CStockAdvanceFilter_Forecast_MA((0.99,1, 1.01, 1.03, 1.05, 1.07,1.099),0.05)
+
+    filter19 = CStockAdvanceFilter_Forecast_MA([1 + x / 1000.0 for x in range(-30, 100, 5)],0.05)
     __advanceFilter(filter19)
 
 def AdvanceFilterTest():
@@ -244,6 +245,7 @@ def TestOneFileWithStockIDs(stockIDs,filter_):
 if __name__ == '__main__':
 #     DoAdvanceFilterMain()
     #MergeAllResult()
+    # print([1 + x / 1000.0 for x in range(-30, 100, 5)])
     Test()
 #     DoAdvanceFilterEx()
     #AdvanceFilterTest()
