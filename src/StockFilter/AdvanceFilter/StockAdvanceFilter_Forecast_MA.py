@@ -139,7 +139,7 @@ class CStockAdvanceFilter_Forecast_MA(IAdvanceFilterBase):
             res = self.FilterByPercentage(newDataFrame, percentage)
             if(res[0] == True):
                 ret.update(res[1])
-                ret['C_预测涨跌幅%%'] = (percentage - 1)*100
+                ret['C_预测涨跌幅%'] = (percentage - 1)*100
                 ret['C_预测价'] = newDataFrame.iloc[-1][stock_ClosePrice]
                 return (True,ret)
         
