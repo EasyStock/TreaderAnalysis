@@ -115,14 +115,14 @@ def MergeAllResult():
         res.to_excel(fileName,encoding="utf_8_sig", index=False)
 
 def DoAdvanceFilter():
-    filter1 = CAdvanceFilter_ShortDistance(0.5)
-    filter2 = CAdvanceFilter_RSI_DunHua(threshold_max=83)
-    __advanceFilter(filter1)
-    __advanceFilter(filter2)
+    # filter1 = CAdvanceFilter_ShortDistance(0.5)
+    # filter2 = CAdvanceFilter_RSI_DunHua(threshold_max=83)
+    # __advanceFilter(filter1)
+    # __advanceFilter(filter2)
 #     advanceFilterByFilter()
 #     advanceFilterAll()
-    filter3 = CAdvanceFilter_MidDistance(0.8)
-    __advanceFilter(filter3)
+    # filter3 = CAdvanceFilter_MidDistance(0.8)
+    # __advanceFilter(filter3)
 
     filter4 = CAdvanceFilter_NewHigh(90)
     __advanceFilter(filter4)
@@ -139,17 +139,17 @@ def DoAdvanceFilter():
     # filter11= CAdvanceFilter_RSI_BeiLi(40)
     # __advanceFilter(filter11)
     
-    filter13 = CAdvanceFilter_YunXian()
-    __advanceFilter(filter13)
+    # filter13 = CAdvanceFilter_YunXian()
+    # __advanceFilter(filter13)
      
-    filter14 = CAdvanceFilter_AttackDay()
-    __advanceFilter(filter14)
+    # filter14 = CAdvanceFilter_AttackDay()
+    # __advanceFilter(filter14)
     
-    filter15 = CAdvanceFilter_AYa()
-    __advanceFilter(filter15)
+    # filter15 = CAdvanceFilter_AYa()
+    # __advanceFilter(filter15)
     
-    filter16 = CAdvanceFilter_ShadowUp(3.0)
-    __advanceFilter(filter16)
+    # filter16 = CAdvanceFilter_ShadowUp(3.0)
+    # __advanceFilter(filter16)
 
     filter17 = CAdvanceFilter_LineTurnUp()
     __advanceFilter(filter17)
@@ -159,7 +159,7 @@ def DoAdvanceFilter():
     
 def DoAdvanceFilterMain():
     DoAdvanceFilter()
-    DoAdvanceFilterEx()
+    #DoAdvanceFilterEx()
     
 def DoAdvanceFilterEx():
     advanceMgr = CStockAdvanceFilterMgrEx()
