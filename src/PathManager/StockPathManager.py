@@ -20,6 +20,10 @@ analysisPath = '%s/分析/'%(outStockPath)
 filterPath = '%s/过滤/'%(outStockPath)
 SummaryPath = '%s/汇总/'%(outStockPath)
 mergedPath = '%s/合并/'%(outStockPath)
+mergedPath_Week = '%s/合并/周合并/'%(outStockPath)
+mergedPath_Month= '%s/合并/月合并/'%(outStockPath)
+mergedPath_Year= '%s/合并/年合并/'%(outStockPath)
+mergedPath_Zip= '%s/合并/压缩合并/'%(outStockPath)
 advanceFilterPath = '%s/多日过滤/'%(outStockPath)
 advanceFilterExPath = '%s/多日过滤Ex/'%(outStockPath)
 combinedFilterPath = '%s/组合过滤/'%(outStockPath)
@@ -42,6 +46,10 @@ allFolder = (rawPath,
              filterPath,
              SummaryPath,
              mergedPath,
+             mergedPath_Week,
+             mergedPath_Month,
+             mergedPath_Year,
+             mergedPath_Zip,
              analysisBanKuaiPath,
              analysisBanKuaiPath_Repeatable,
              analysisBanKuaiSummaryPath,
@@ -115,6 +123,18 @@ def GetAnalysisBanKuaiSummaryFolder_Repeatable():
 
 def GetMergedFolder():
     return getFolder(mergedPath)
+
+def GetMergedFolder_Week():
+    return getFolder(mergedPath_Week)
+
+def GetMergedFolder_Month():
+    return getFolder(mergedPath_Month)
+
+def GetMergedFolder_Year():
+    return getFolder(mergedPath_Year)
+
+def GetMergedFolder_Zip():
+    return getFolder(mergedPath_Zip)
 
 def GetAdvanceFilterFolder():
     return getFolderWithDate(advanceFilterPath)
