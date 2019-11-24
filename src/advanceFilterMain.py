@@ -216,13 +216,13 @@ def Test():
     # filter16 = CAdvanceFilter_ShadowUp(3.0)
     # __advanceFilter(filter16)
 
-    # filter17 = CAdvanceFilter_LineTurnUp(0.05)
-    # __advanceFilter(filter17)
+    filter17 = CAdvanceFilter_LineTurnUp(0.05)
+    __advanceFilter(filter17)
 
     # filter18 = CStockAdvanceFilter_Forecast_MA20()
     # __advanceFilter(filter18)
 
-    filter19 = CStockAdvanceFilter_Forecast_MA([1 + x / 1000.0 for x in range(-30, 100, 5)],0.05)
+    filter19 = CStockAdvanceFilter_Forecast_MA([1 + x / 1000.0 for x in range(-50, 100, 5)],0.05)
     __advanceFilter(filter19)
 
 def AdvanceFilterTest():

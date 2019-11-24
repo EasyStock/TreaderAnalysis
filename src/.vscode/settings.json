@@ -2,5 +2,6 @@
     "files.exclude": {
         "**/.pyc": true
     },
-    "python.autoComplete.showAdvancedMembers": false
+    "python.autoComplete.showAdvancedMembers": false,
+    "python.envFile": "${workspaceFolder}/.vscode/.env",
 }

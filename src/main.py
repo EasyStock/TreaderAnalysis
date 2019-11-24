@@ -3,7 +3,7 @@ Created on May 6, 2019
 
 @author: mac
 '''
-from PathManager.StockPathManager import GetRawDataFolder_Stock, GetDailyDataFolder, GetMergedFolder
+from PathManager.StockPathManager import GetRawDataFolder_Stock, GetDailyDataFolder, GetMergedFolder,GetMergedFolder_Month
 import os
 from StockDataItemIO.StockItemIO import CStockItemIO
 from StockMerge.MergeStock import MergeStockMgr
@@ -35,13 +35,20 @@ def MergeFiles():
     merge = MergeStockMgr()
     merge.MergeStockWithFolder(srcFolder, destFolder)
 
+def TestMergeFiles():
+    srcFolder = GetDailyDataFolder()
+    destFolder = GetMergedFolder_Month()
+    merge = MergeStockMgr()
+    merge.FastMerge_Last_TwoMonth(srcFolder, destFolder)
+
 if __name__ == '__main__':
-    ConverHTMLToXlSX()
-    MergeFiles()
-    CalcThreshold()
+    # ConverHTMLToXlSX()
+    # MergeFiles()
+    TestMergeFiles()
+    # CalcThreshold()
     
     #DoFilterMain()
-    DoAdvanceFilterMain()
+    # DoAdvanceFilterMain()
     #CombinedFilteMain()
    
 
