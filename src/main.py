@@ -42,13 +42,13 @@ def TestMergeFiles():
     merge.FastMerge_Last_TwoMonth(srcFolder, destFolder)
 
 if __name__ == '__main__':
-    # ConverHTMLToXlSX()
-    # MergeFiles()
-    TestMergeFiles()
-    # CalcThreshold()
+     ConverHTMLToXlSX()
+     MergeFiles()
+    #TestMergeFiles()
+     CalcThreshold()
     
     #DoFilterMain()
-    # DoAdvanceFilterMain()
+     DoAdvanceFilterMain()
     #CombinedFilteMain()
    
 
