@@ -34,9 +34,9 @@ def executeSQL(db, sql):
         cursor.execute(sql)
         # 提交到数据库执行
         db.commit()
-    except:
+    except Exception as e:
         # Rollback in case there is any error
-        print('插入数据失败!')
+        print('插入数据失败!', e)
         db.rollback()
 
 def querydb(db,sql_statement):
