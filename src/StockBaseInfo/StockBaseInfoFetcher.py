@@ -50,16 +50,16 @@ class CStockBaseInfoFetcher(object):
         return None
 
     def FormatSQLOfSZ(self,df):
-        return self.FormatSQLWithTableName(df,'stock_baseinfo_SZ')
+        return self.FormatSQLWithTableName(df,'stock_baseinfo_sz')
     
     def FormatSQLOfSH(self,df):
-        return self.FormatSQLWithTableName(df,'stock_baseinfo_SH')
+        return self.FormatSQLWithTableName(df,'stock_baseinfo_sh')
 
     def FormatSQLWithTableName(self, df,tableName):
         if df is None:
             return ""
 
-        sql = '''TRUNCATE TABLE %s; insert into %s (stockID, stockName, listingDate) values''' %(tableName, tableName)
+        sql = '''insert into `%s` (stockID, stockName, listingDate) values''' %(tableName)
         size = len(df)
         for index in range(0, len(df)):
             row = df.iloc[index]
@@ -69,7 +69,7 @@ class CStockBaseInfoFetcher(object):
             if len(stockListingDate.split('-')) != 3:
                 stockListingDate = '1970-01-01'
             if index != size -1:
-                sql = sql + '''('%s', '%s','%s'),'''%(stockID, stockName,stockListingDate)
+                sql = sql + '''('%s', '%s','%s'),\n'''%(stockID, stockName,stockListingDate)
             else:
                 sql = sql + '''('%s', '%s', '%s');'''%(stockID, stockName, stockListingDate)
         return sql
