@@ -9,7 +9,7 @@ SQL_USER = '******'
 SQL_PWD = '******'
 SQL_DB = '******'
 
-def connectdb():
+def connectdb(dbName):
     print('connecting to mysql server...')
     # 打开数据库连接
     # 
@@ -17,7 +17,7 @@ def connectdb():
                              port=SQL_PORT,
                              user=SQL_USER,
                              password=SQL_PWD,
-                             db=SQL_DB,
+                             db=dbName,
                              charset='utf8')
 
     print('conencted to mysql server successfully!')

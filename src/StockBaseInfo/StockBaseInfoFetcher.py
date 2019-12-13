@@ -49,12 +49,6 @@ class CStockBaseInfoFetcher(object):
             print(e)
         return None
 
-    def FormatSQLOfSZ(self,df):
-        return self.FormatSQLWithTableName(df,'stock_baseinfo_sz')
-    
-    def FormatSQLOfSH(self,df):
-        return self.FormatSQLWithTableName(df,'stock_baseinfo_sh')
-
     def FormatSQLWithTableName(self, df,tableName):
         if df is None:
             return ""
@@ -74,7 +68,7 @@ class CStockBaseInfoFetcher(object):
                 sql = sql + '''('%s', '%s', '%s');'''%(stockID, stockName, stockListingDate)
         return sql
 
-    def FetchBaseInfoFromSZ(self):
+    def FetchBaseInfoDataFromSZ(self):
         Rawdata = self.FetchDataFrom(szse_site, szse_url)
         if Rawdata == None:
             print('获取深圳交易所所有股票失败!')
@@ -93,8 +87,8 @@ class CStockBaseInfoFetcher(object):
         print(sub.head())
         print(u'获取深圳交易所所有股票成功！总共:%d' % (sub.shape[0]))
         return sub
-
-    def FetchBaseInfoFromSH(self):
+        
+    def FetchBaseInfoDataFromSH(self):
         Rawdata = self.FetchDataFrom(sse_site, sse_url, sse_head)
         if Rawdata == None:
             print('获取上海交易所所有股票失败!')
@@ -115,8 +109,20 @@ class CStockBaseInfoFetcher(object):
         print(df.head())
         return df
 
+    def FetchBaseInfoAndFormatSQLFromSH(self,tableName):
+        df = self.FetchBaseInfoDataFromSH()
+        if df is not None:
+            return self.FormatSQLWithTableName(df,tableName)
+        return None
+
+    def FetchBaseInfoAndFormatSQLFromSZ(self,tableName):
+        df = self.FetchBaseInfoDataFromSZ()
+        if df is not None:
+            return self.FormatSQLWithTableName(df,tableName)
+        return None
+
 if __name__ == '__main__':
     fetcher = CStockBaseInfoFetcher()
     df = fetcher.FetchBaseInfoFromSH()
     sql = fetcher.FormatSQLOfSH(df)
-    print(sql)
+    print(sql[:100])
