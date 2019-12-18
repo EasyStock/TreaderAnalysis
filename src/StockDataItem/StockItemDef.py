@@ -67,3 +67,56 @@ stock_DistanceMA30 = u'股价距离30日线距离'
 stock_DistanceMA60 = u'股价距离季线距离' 
 stock_DistanceMA120 = u'股价距离半年线距离'
 stock_DistanceMA240 = u'股价距离年线距离'
+
+
+STOCK_TABLE_INDEX = [
+    stock_OpenPrice,
+    stock_ClosePrice,
+    stock_ClosePrice_Yesterday,
+    stock_HighPrice,
+    stock_LowerPrice,
+    stock_Volumn,
+    stock_Turnover,
+    stock_Volumn_Ratio,
+    stock_ZhangDieFu,
+
+    stock_MA5,
+    stock_MA10,
+    stock_MA20,
+    stock_MA30,
+    stock_MA60,
+    stock_MA120,
+    stock_MA240,
+
+    stock_MACD,
+    stock_BOLLUp,
+    stock_BOLLMid,
+    stock_BOLLDown,
+    stock_BOLL_Percent,
+    stock_BOLL_Band_width,
+    stock_CLOSE_TO_BOLLUP,
+    stock_CLOSE_TO_BOLLDOWN,
+    stock_CLOSE_TO_BOLLMID,
+
+    stock_CLOSE_TO_BOLL_DOWN_TO_UP,
+    stock_DISTANCE_MA_SHORT,
+    stock_DISTANCE_MA_MID,
+    stock_DISTANCE_MA_LONG,
+    stock_RSI_6,
+    stock_RSI_12,
+    stock_RSI_24,
+
+    stock_ShiZhi,
+    stock_HangYe,
+    stock_GaiNian,
+    
+    stock_Days,
+    stock_XinTai,
+    stock_DistanceMA5,
+    stock_DistanceMA10,
+    stock_DistanceMA20,
+    stock_DistanceMA30,
+    stock_DistanceMA60,
+    stock_DistanceMA120,
+    stock_DistanceMA240
+]

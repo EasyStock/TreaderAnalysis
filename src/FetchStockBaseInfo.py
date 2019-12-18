@@ -70,7 +70,7 @@ if __name__ == '__main__':
     #DropBaseInfoTables()
     #
     #CreatBaseInfoTables()
-    #FetchStockBaseInfo()
+    FetchStockBaseInfo()
     allInfos = QueryOneBasicInfo('000001')
     # print(allInfos)
     for allInfo in allInfos:
