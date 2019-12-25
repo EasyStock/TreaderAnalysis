@@ -85,7 +85,7 @@ def truncateTable_DailyWithStockIDs(stockIDs,schema):
     return sqls
 # TRUNCATE Table End
 
-def InsterDailyDataInto(date, df,schema):
+def InsterDailyDataInto(date, df,schema,stockIDs):
     if df is None:
         return ""
 
@@ -95,6 +95,11 @@ def InsterDailyDataInto(date, df,schema):
         row = df.iloc[index]
         stockID = row[stock_ID]
         stockID = stockID[:stockID.rfind('.')]
+        if stockID not in stockIDs:
+            sql = createTable_Daily(stockID,schema)
+            print(sql)
+            sqls.append(sql)
+            
         sql = '''
         INSERT INTO `%s`.`I_%s` (
         `date`, `openPrice`, `closePrice`,
