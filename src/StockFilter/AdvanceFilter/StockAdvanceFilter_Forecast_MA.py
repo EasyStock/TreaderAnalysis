@@ -135,7 +135,11 @@ class CStockAdvanceFilter_Forecast_MA(IAdvanceFilterBase):
         ret['C_收盘价'] = df.iloc[-1][stock_ClosePrice]
 
         for percentage in self.percentages:
-            newDataFrame = self._calcNewDataFrame(df, percentage)
+            try:
+                newDataFrame = self._calcNewDataFrame(df, percentage)
+            except:
+                print(ret)
+                continue
             res = self.FilterByPercentage(newDataFrame, percentage)
             if(res[0] == True):
                 ret.update(res[1])

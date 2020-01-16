@@ -62,7 +62,7 @@ class MergeStockYearlyMgr(object):
         for folderName in folderNames:
             if folderName.find('.DS_Store')!=-1:
                 continue
-            
+
             (yearOfFolder,_) = folderName.split('-')
             if sinceYear != None and yearOfFolder < sinceYear:
                 continue
@@ -74,8 +74,12 @@ class MergeStockYearlyMgr(object):
         #         print(year, fileMaping[year][stockID])
         #         input()
         for year in fileMaping:
+            count = len(fileMaping[year].keys())
+            index = 1
             for stockID in fileMaping[year]:
+                print('index:%04d, start to merge StockID:%08s of %s, total:%s'%(index, stockID, year, count))
                 self.MergeFilesWithList(year,fileMaping[year][stockID], destFolder)
+                index = index +1
 
 if __name__ == '__main__':
    pass

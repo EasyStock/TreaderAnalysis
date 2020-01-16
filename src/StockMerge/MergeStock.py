@@ -151,7 +151,6 @@ class MergeStockMgr(object):
             destFileName = '%s/%s.xlsx'%(destFolder, stockId)
             df.to_excel(destFileName,encoding="utf_8_sig", index=False)
 
-
 if __name__ == '__main__':
     mgr = MergeStockMgr()
     folder = u'/Volumes/Data/StockAssistant/TreaderAnalysis/data/output/每日数据/'

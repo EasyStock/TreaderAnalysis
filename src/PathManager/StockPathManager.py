@@ -20,9 +20,11 @@ analysisPath = '%s/分析/'%(outStockPath)
 filterPath = '%s/过滤/'%(outStockPath)
 SummaryPath = '%s/汇总/'%(outStockPath)
 mergedPath = '%s/合并/'%(outStockPath)
-mergedPath_Week = '%s/合并/周合并/'%(outStockPath)
+
+mergedPath_Last = '%s/合并/最近合并/'%(outStockPath)
 mergedPath_Month= '%s/合并/月合并/'%(outStockPath)
 mergedPath_Year= '%s/合并/年合并/'%(outStockPath)
+
 mergedPath_Zip= '%s/合并/压缩合并/'%(outStockPath)
 advanceFilterPath = '%s/多日过滤/'%(outStockPath)
 advanceFilterExPath = '%s/多日过滤Ex/'%(outStockPath)
@@ -46,7 +48,7 @@ allFolder = (rawPath,
              filterPath,
              SummaryPath,
              mergedPath,
-             mergedPath_Week,
+             mergedPath_Last,
              mergedPath_Month,
              mergedPath_Year,
              mergedPath_Zip,
@@ -124,8 +126,8 @@ def GetAnalysisBanKuaiSummaryFolder_Repeatable():
 def GetMergedFolder():
     return getFolder(mergedPath)
 
-def GetMergedFolder_Week():
-    return getFolder(mergedPath_Week)
+def GetMergedFolder_Last():
+    return getFolder(mergedPath_Last)
 
 def GetMergedFolder_Month():
     return getFolder(mergedPath_Month)
