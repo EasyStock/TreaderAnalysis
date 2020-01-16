@@ -3,7 +3,7 @@ Created on May 6, 2019
 
 @author: mac
 '''
-from PathManager.StockPathManager import GetRawDataFolder_Stock, GetDailyDataFolder, GetMergedFolder,GetMergedFolder_Month
+from PathManager.StockPathManager import GetRawDataFolder_Stock, GetDailyDataFolder, GetMergedFolder_Last,GetMergedFolder_Month
 import os
 from StockDataItemIO.StockItemIO import CStockItemIO
 from StockMerge.MergeStock import MergeStockMgr
@@ -31,7 +31,7 @@ def ConverHTMLToXlSX():
     
 def MergeFiles():
     srcFolder = GetDailyDataFolder()
-    destFolder = GetMergedFolder()
+    destFolder = GetMergedFolder_Last()
     merge = MergeStockMgr()
     merge.MergeStockWithFolder(srcFolder, destFolder)
 
