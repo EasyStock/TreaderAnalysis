@@ -53,7 +53,7 @@ class MergeStockMonthlyMgr(object):
                         columns.insert(0, stock_Date)
 
             for stockId in res:
-                print(u'stockID:%s, size:%d'%(stockId, len(res[stockId])))
+                print(u'OutPut----> stockID:%s, size:%d'%(stockId, len(res[stockId])))
                 df = pd.DataFrame(res[stockId],columns = columns)
                 destFileName = '%s/%s.xlsx'%(destFolder, stockId)
                 df.to_excel(destFileName,encoding="utf_8_sig", index=False)

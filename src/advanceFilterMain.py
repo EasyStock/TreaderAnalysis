@@ -8,7 +8,7 @@ from StockFilter.AdvanceFilter.StockAdvanceFilter_RSI_DunHua import CAdvanceFilt
 from StockFilter.AdvanceFilter.StockAdvanceFilter_BOLL_WIDTH import CAdvanceFilter_BOLL_WIDTH
 from StockFilter.AdvanceFilter.StockAdvanceFilter_Red3 import CAdvanceFilter_Red3
 from StockFilter.FilterMgr.StockAdvanceFilterMgr import CAdvanceFilterMgr
-from PathManager.StockPathManager import GetMergedFolder, GetAdvanceFilterFolder,\
+from PathManager.StockPathManager import GetMergedFolder_Last, GetAdvanceFilterFolder,\
     GetRawDataFolder_Stock, GetOutDataFolder, GetAdvanceFilterExFolder
 import os
 import pandas as pd
@@ -44,7 +44,7 @@ def __FilterOneFile(filter_, fileName):
 def __advanceFilter(filter_):
     message = 'start do job with filter:%s '%(filter_.filterName)
     print(message)
-    srcFolder = GetMergedFolder()
+    srcFolder = GetMergedFolder_Last()
     folder_dest = GetAdvanceFilterFolder()
     mgr = CAdvanceFilterMgr()
     mgr.FilterFolder(srcFolder, filter_ ,folder_dest)
@@ -52,13 +52,13 @@ def __advanceFilter(filter_):
     print(message)
 
 def __advanceFilterEveryDay(filter_):
-    srcFolder = GetMergedFolder()
+    srcFolder = GetMergedFolder_Last()
     folder_dest = GetAdvanceFilterFolder()
     mgr = CAdvanceFilterMgr()
     mgr.FilterFolderEveryDay(srcFolder, filter_ ,folder_dest)
     
 def __advanceFilterByFilter(filters):
-    srcFolder = GetMergedFolder()
+    srcFolder = GetMergedFolder_Last()
     folder_dest = GetAdvanceFilterFolder()
     mgr = CAdvanceFilterMgr()
     mgr.FilterFileByFilter_Folder(srcFolder, filters ,folder_dest)
@@ -165,7 +165,7 @@ def DoAdvanceFilterEx():
     advanceMgr = CStockAdvanceFilterMgrEx()
     threadFile = '%s/threshold.xlsx'%(GetOutDataFolder())
     advanceMgr.ReadThreshold(threadFile)
-    folder = GetMergedFolder()
+    folder = GetMergedFolder_Last()
     outFolder = GetAdvanceFilterExFolder()
     fitlerNames = [
         K_ADVANCE_FILTER_EX_BOLL_WIDTH,
@@ -243,10 +243,10 @@ def TestOneFileWithStockIDs(stockIDs,filter_):
         __FilterOneFile(filter_,fileName)
 
 if __name__ == '__main__':
-#     DoAdvanceFilterMain()
+    DoAdvanceFilterMain()
     #MergeAllResult()
     # print([1 + x / 1000.0 for x in range(-30, 100, 5)])
-    Test()
+    # Test()
 #     DoAdvanceFilterEx()
     #AdvanceFilterTest()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)
