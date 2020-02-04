@@ -9,6 +9,7 @@ from StockMerge.MergeStockYearly import MergeStockYearlyMgr
 from PathManager.StockPathManager import GetMergedFolder_Last,GetMergedFolder_Month,GetMergedFolder_Year,GetDailyDataFolder
 import datetime
 from StockMerge.MergeStockLastest import CMergeStockLasterMgr
+from StockMerge.MergeStockLastN import CMergeStockLastNMgr
 
 def GetMergeTimeSinceNow():
     today = str(datetime.date.today())
@@ -64,6 +65,13 @@ def MergeStockYearlyAuto():
     MergeStockMonthly(sinceMonth)
     MergeStockYearly(sinceYear)
 
+def MergeStockLastNAuto(lastN = 90):
+    srcFolder = GetDailyDataFolder()
+    destFolder = GetMergedFolder_Last()
+    lastNmgr= CMergeStockLastNMgr()
+    lastNmgr.MergeLastN(srcFolder,destFolder,lastN)
+
+
 def TestMergeLast():
     dailyFolder = GetDailyDataFolder()
     monthlyFolder = GetMergedFolder_Month()
@@ -72,6 +80,13 @@ def TestMergeLast():
     mgr = CMergeStockLasterMgr()
     mgr.Merge(dailyFolder, testFoldef, monthlyFolder, yearlyFolder, lastNDay=30)
 
+def TestMergeLastN():
+    srcFolder = GetDailyDataFolder()
+    testFoldef = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/股票/合并/最近合并1'
+    lastNmgr= CMergeStockLastNMgr()
+    lastNmgr.MergeLastN(srcFolder,testFoldef,30)
+    #GetMergedFolder_Last
+
 
 if __name__ == '__main__':
     #MergeStockMonthly()
@@ -79,4 +94,5 @@ if __name__ == '__main__':
     #MergeStockMonthlyAuto()
     #MergeStockYearlyThisYear()
     #MergeStockYearlyAuto()
-    TestMergeLast()
+    #TestMergeLast()
+    TestMergeLastN()

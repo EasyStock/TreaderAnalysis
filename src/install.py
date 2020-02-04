@@ -10,6 +10,7 @@ if __name__ == '__main__':
     command = (
                 'python3 -m pip install -U pip',
                 'python3 -m pip install -U matplotlib',
+                'pip3 install --upgrade pip',
                 "pip3 install pandas",
                 "pip3 install xlwt",
                 "pip3 install xlrd",

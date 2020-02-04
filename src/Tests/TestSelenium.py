@@ -9,8 +9,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
 
+downLoadPath = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/'
 def start(site = "http://x.iwencai.com/"):
     chrome_options = Options()
+    prefs = {'download.default_directory': downLoadPath}
+    chrome_options.add_experimental_option('prefs', prefs)
+
     #chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(site)
@@ -45,4 +49,5 @@ if __name__ == '__main__':
     driver = start()
     login(driver)
     downloadFile(driver)
-    end(driver)
+    time.sleep(5)
+    #end(driver)

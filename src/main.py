@@ -11,6 +11,7 @@ from advanceFilterMain import DoAdvanceFilterMain
 from filterMain import DoFilterMain
 from thresholdCalcMgr import CalcThreshold
 from CombinedFilterMain import CombinedFilteMain
+from StockMergeMain import MergeStockLastNAuto
 
 def ConverHTMLToXlSX():
     folder = GetRawDataFolder_Stock()
@@ -43,7 +44,8 @@ def TestMergeFiles():
 
 if __name__ == '__main__':
      ConverHTMLToXlSX()
-     MergeFiles()
+     MergeStockLastNAuto(90)
+    #MergeFiles()
     #TestMergeFiles()
      CalcThreshold()
     
