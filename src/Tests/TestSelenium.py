@@ -9,7 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
 
-downLoadPath = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/'
+downLoadPath = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/rawData/股票/'
 def start(site = "http://x.iwencai.com/"):
     chrome_options = Options()
     prefs = {'download.default_directory': downLoadPath}
