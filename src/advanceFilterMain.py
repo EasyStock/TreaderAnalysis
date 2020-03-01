@@ -154,7 +154,7 @@ def DoAdvanceFilter():
     filter17 = CAdvanceFilter_LineTurnUp()
     __advanceFilter(filter17)
 
-    filter19 = CStockAdvanceFilter_Forecast_MA([1 + x / 1000.0 for x in range(-30, 100, 5)],0.05)
+    filter19 = CStockAdvanceFilter_Forecast_MA([1 + x / 1000.0 for x in range(-30, 30, 5)],0.05)
     __advanceFilter(filter19)
     
 def DoAdvanceFilterMain():
