@@ -121,8 +121,8 @@ def DoAdvanceFilter():
     # __advanceFilter(filter2)
 #     advanceFilterByFilter()
 #     advanceFilterAll()
-    # filter3 = CAdvanceFilter_MidDistance(0.8)
-    # __advanceFilter(filter3)
+    filter3 = CAdvanceFilter_MidDistance(0.8)
+    __advanceFilter(filter3)
 
     filter4 = CAdvanceFilter_NewHigh(90)
     __advanceFilter(filter4)
@@ -179,8 +179,8 @@ def Test():
 #     __advanceFilter(filter1)
 #     filter2 = CAdvanceFilter_ShortDistanceEx(0.8)
 #     __advanceFilter(filter2)
-#     filter3 = CAdvanceFilter_MidDistance(0.8)
-#     __advanceFilter(filter3)
+    filter3 = CAdvanceFilter_MidDistance(0.8)
+    __advanceFilter(filter3)
     # filter4 = CAdvanceFilter_NewHigh(90)
     # __advanceFilter(filter4)
 #     filter5 = CAdvanceFilter_NewHigh(50)
@@ -216,14 +216,14 @@ def Test():
     # filter16 = CAdvanceFilter_ShadowUp(3.0)
     # __advanceFilter(filter16)
 
-    filter17 = CAdvanceFilter_LineTurnUp(0.05)
-    __advanceFilter(filter17)
+    # filter17 = CAdvanceFilter_LineTurnUp(0.05)
+    # __advanceFilter(filter17)
 
     # filter18 = CStockAdvanceFilter_Forecast_MA20()
     # __advanceFilter(filter18)
 
-    filter19 = CStockAdvanceFilter_Forecast_MA([1 + x / 1000.0 for x in range(-50, 100, 5)],0.05)
-    __advanceFilter(filter19)
+    # filter19 = CStockAdvanceFilter_Forecast_MA([1 + x / 1000.0 for x in range(-50, 100, 5)],0.05)
+    # __advanceFilter(filter19)
 
 def AdvanceFilterTest():
     advanceMgr = CStockAdvanceFilterMgrEx()
@@ -243,10 +243,10 @@ def TestOneFileWithStockIDs(stockIDs,filter_):
         __FilterOneFile(filter_,fileName)
 
 if __name__ == '__main__':
-    DoAdvanceFilterMain()
+    # DoAdvanceFilterMain()
     #MergeAllResult()
     # print([1 + x / 1000.0 for x in range(-30, 100, 5)])
-    # Test()
+    Test()
 #     DoAdvanceFilterEx()
     #AdvanceFilterTest()
 #     filter3 = CAdvanceFilter_MidDistance(1.0)

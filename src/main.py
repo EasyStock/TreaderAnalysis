@@ -53,7 +53,7 @@ if __name__ == '__main__':
      mergeTime = time.time()
      WARNING_LOG(("mergeTime:%s"%(mergeTime - ConverToXMLTime)))
     #MergeFiles()
-    #TestMergeFiles()
+    #TestMergeFiles() 
      CalcThreshold()
      CalcThresholdTime = time.time()
      WARNING_LOG(("CalcThresholdTime:%s"%(CalcThresholdTime - mergeTime)))

@@ -3,11 +3,10 @@
 
 import pymysql
 
-SQL_HOST = '******'
-SQL_PORT = '******'
-SQL_USER = '******'
-SQL_PWD = '******'
-SQL_DB = '******'
+SQL_HOST = '192.168.1.12'
+SQL_PORT = 3306
+SQL_USER = 'jianpinh'
+SQL_PWD = '861022'
 
 def connectdb(dbName):
     print('connecting to mysql server...')
@@ -58,5 +57,5 @@ def closedb(db):
 
 if __name__ == '__main__':
     db = connectdb()
-    sql = '''use world; select * from city;'''
+    sql = '''select * from stock_baseinfo_sh;'''
     executeSQL(db,sql)

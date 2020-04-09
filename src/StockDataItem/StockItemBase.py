@@ -26,7 +26,7 @@ class CStockItemBase(CStockItemTemplate):
     def __parseJiShuXinTai(self):
         xinTai = self.stockInfo[stock_XinTai]
         self.__jishuXinTai = []
-        if xinTai:
+        if xinTai and isinstance(xinTai,str):
             words = xinTai.split(';')
             self.__jishuXinTai.extend(words)
                     
