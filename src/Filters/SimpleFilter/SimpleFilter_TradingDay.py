@@ -18,9 +18,14 @@ class CSimpleFilter_TradingDay(SimpleFilterBase.CSimpleFilterBase):
         if dataFrame is None:
             raise Exception('CSimpleFilter_ZhangDieFu dataFrame is None!')
 
-        self.filterResult['333'] = 444
         self.filterResult['FilterName'] = self.filterName
-        tradingDays = float(dataFrame.iloc[-1][SimpleFilterBase.stock_Days])
+        tradingDays = dataFrame.iloc[-1][SimpleFilterBase.stock_Days]
+        try:
+            tradingDays = int(tradingDays)
+        except:
+            tradingDays = int(float(tradingDays[:tradingDays.find('万')])*10000)
+
+        self.filterResult['tradingDays'] = tradingDays
         if float(self.params[0])<= tradingDays < float(self.params[1]):
             return True
         else:

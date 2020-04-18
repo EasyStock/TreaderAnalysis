@@ -18,7 +18,6 @@ class CSimpleFilter_ZhangDieFu(SimpleFilterBase.CSimpleFilterBase):
         if dataFrame is None:
             raise Exception('CSimpleFilter_ZhangDieFu dataFrame is None!')
 
-        self.filterResult['111'] = 222
         self.filterResult['FilterName'] = self.filterName
         zhangdieFu = float(dataFrame.iloc[-1][SimpleFilterBase.stock_ZhangDieFu])
         if float(self.params[0])<= zhangdieFu < float(self.params[1]):

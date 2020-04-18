@@ -145,7 +145,7 @@ class CSimpleFilterBase(object):
 
     def FilterNext(self, dataFrame, nextFilter = None):
         if dataFrame is None :
-            return (False,[])
+            raise Exception('FilterNext dataFrame is None')
         
         if nextFilter is None:
             return (True,[])
@@ -169,5 +169,5 @@ class CSimpleFilterBase(object):
             else:
                 nextParameter = nextFilter[1:]
                 returnFlag,result = next.FilterNext(dataFrame,nextParameter)
-                next.callStack.extend(result)
+                next.callStack.append(result)
                 return( returnFlag, next.callStack)
