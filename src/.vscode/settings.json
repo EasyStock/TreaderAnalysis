@@ -4,4 +4,5 @@
     },
     "python.autoComplete.showAdvancedMembers": false,
     "python.envFile": "${workspaceFolder}/.vscode/.env",
+    "python.pythonPath": "/usr/local/bin/python3.7",
 }
