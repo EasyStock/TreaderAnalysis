@@ -8,7 +8,7 @@ from Filters.SimpleFilter import SimpleFilter_TradingDay,SimpleFilter_ZhangDieFu
 import pandas as pd
 import os
 import multiprocessing
-
+import time
 
 def Test():
     folder = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/股票/合并/最近合并/'
@@ -69,18 +69,18 @@ def MultiProcessFunction(fileName):
         df = pd.read_excel(fileName, index_col = None, encoding='utf_8_sig')
         filter1 = SimpleFilter_TradingDay.CSimpleFilter_TradingDay([250,9999999]) #非新股和次新股
         filter11 =  SimpleFilter_NotST.CSimpleFilter_NotST() #Not ST
-        filter2 = SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(5) #MA5
-        filter21 = SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(10) #MA5
-        filter3 =  SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(20) #MA20
-        filter4 =  SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(30) #MA30
-        filter5 =  SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(60) #MA60
-        filter6 =  SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(120) #MA120
-        filter7 =  SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(240) #MA240
-        filter9 =  SimpleFilter_UpStates.CSimpleFilter_UpStates() #MA240
-        res = filter1.Filter(df,(filter11,filter2,filter21,filter3,filter4,filter5,filter6,filter7,filter9))
+        # filter2 = SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(5) #MA5
+        # filter21 = SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(10) #MA5
+        # filter3 =  SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(20) #MA20
+        # filter4 =  SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(30) #MA30
+        # filter5 =  SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(60) #MA60
+        # filter6 =  SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(120) #MA120
+        # filter7 =  SimpleFilter_GreatThanMA.CSimpleFilter_GreatThanMA(240) #MA240
+        # filter9 =  SimpleFilter_UpStates.CSimpleFilter_UpStates() #MA240
+        # res = filter1.Filter(df,(filter11,filter2,filter21,filter3,filter4,filter5,filter6,filter7,filter9))
 
-        #filter8 =  SimpleFilter_ClosePriceNewHigh.CSimpleFilter_ClosePriceNewHigh(90)
-        #res = filter8.Filter(df,(filter1,filter11))
+        filter8 =  SimpleFilter_ClosePriceNewHigh.CSimpleFilter_ClosePriceNewHigh(90)
+        res = filter8.Filter(df,(filter1,filter11))
         if res == True:
             print(fileName)
         
@@ -97,7 +97,52 @@ def TestMultiProcess():
     pool.close() 
     pool.join()
 
+def TestReadAllFiles_Fun(fileName):
+    stockID = fileName[:fileName.find('.')]
+    df = pd.read_excel(fileName, index_col = None, encoding='utf_8_sig')
+    print(fileName)
+    return df
+
+def TestReadAllFiles_multiProcess():
+    folder = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/股票/合并/最近合并/'
+    files = os.listdir(folder)
+    dataFrames = []
+    begin_time = time.time()
+
+    pool = multiprocessing.Pool(multiprocessing.cpu_count()*3) # 创建8个进程
+    for file_ in files:
+        fullpath = '%s%s'%(folder,file_)
+        if fullpath.find('.xlsx') == -1:
+            continue
+        dataFrames.append(pool.apply_async(TestReadAllFiles_Fun, (fullpath, )))
+    pool.close() 
+    pool.join()
+    endTime = time.time()
+    print('TestReadAllFiles cost:%s'%(endTime - begin_time))
+    # for item in dataFrames:
+    #     print(item.get())
+    input()
+
+def TestReadAllFiles():
+    folder = '/Volumes/Data/StockAssistant/EasyStock/TreaderAnalysis/data/output/股票/合并/最近合并/'
+    files = os.listdir(folder)
+    dataFrames = []
+    begin_time = time.time()
+    for file_ in files:
+        fullpath = '%s%s'%(folder,file_)
+        if fullpath.find('.xlsx') == -1:
+            continue
+        stockID = file_[:file_.find('.')]
+        df = pd.read_excel(fullpath, index_col = None, encoding='utf_8_sig')
+        dataFrames.append(df)
+        print(fullpath)
+    endTime = time.time()
+    print('TestReadAllFiles cost:%s'%(endTime - begin_time))
+    input()
+
 if __name__ == '__main__':
     #Test()
     #TestFile()
-    TestMultiProcess()
+    #TestMultiProcess()
+    #TestReadAllFiles()
+    TestReadAllFiles_multiProcess()

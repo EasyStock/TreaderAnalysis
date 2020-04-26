@@ -14,6 +14,7 @@ from CombinedFilterMain import CombinedFilteMain
 from StockMergeMain import MergeStockLastNAuto
 import time
 from Log.StockLog import INFO_LOG, ERROR_LOG, WARNING_LOG
+import multiprocessing
 
 def ConverHTMLToXlSX():
     folder = GetRawDataFolder_Stock()
@@ -49,7 +50,7 @@ if __name__ == '__main__':
      ConverHTMLToXlSX()
      ConverToXMLTime = time.time()
      WARNING_LOG(("ConverToXMLTime:%s"%(ConverToXMLTime - begin_time)))
-     MergeStockLastNAuto(95)
+     MergeStockLastNAuto(300)
      mergeTime = time.time()
      WARNING_LOG(("mergeTime:%s"%(mergeTime - ConverToXMLTime)))
     #MergeFiles()
@@ -61,6 +62,6 @@ if __name__ == '__main__':
      DoAdvanceFilterMain()
      DoAdvanceFilterTime = time.time()
      WARNING_LOG(("DoAdvanceFilterTime:%s"%(DoAdvanceFilterTime - CalcThresholdTime)))
-    #CombinedFilteMain()
+     CombinedFilteMain()
    
 

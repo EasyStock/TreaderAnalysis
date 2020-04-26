@@ -6,8 +6,10 @@ Created on May 7, 2019
 import os
 from datetime import date
 
+#rawPath = '../data_Root/原始数据'
 rawPath = '../data/rawData'
 rawStockPath = '%s/股票/'%(rawPath)
+rawStockPath_Temp = '%s/股票临时/'%(rawPath)
 rawIndexBanKuaiPath = '%s/板块指数/'%(rawPath)
 outPath = '%s/../output/'%(rawPath)
 outStockPath = '%s/股票/'%(outPath)
@@ -39,6 +41,7 @@ analysisBanKuaiSummaryPath_Repeatable = '%s/板块汇总_可重复/'%(SummaryPat
 
 allFolder = (rawPath,
              rawStockPath,
+             rawStockPath_Temp,
              rawIndexBanKuaiPath,
              outPath,
              outStockPath,
@@ -89,6 +92,9 @@ def GetRawDataFolder():
 
 def GetRawDataFolder_Stock():
     return getFolder(rawStockPath)
+
+def GetRawStockTempDataFolder():
+    return getFolder(rawStockPath_Temp)
 
 def GetRawDataFolder_Index_BanKuai():
     return getFolder(rawIndexBanKuaiPath)
