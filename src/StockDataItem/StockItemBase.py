@@ -5,6 +5,7 @@ Created on May 3, 2019
 '''
 from StockDataItem.StockItemT import CStockItemTemplate
 from StockDataItem.StockItemDef import stock_GaiNian, stock_XinTai
+import numpy as np
 
 class CStockItemBase(CStockItemTemplate):
 
@@ -16,6 +17,9 @@ class CStockItemBase(CStockItemTemplate):
     
     def __parseBanKuai(self):
         gaiNian = self.stockInfo[stock_GaiNian]
+        if gaiNian == None or gaiNian == np.nan or isinstance(gaiNian, str) == False:
+            return
+        
         self.__banKuaiInfo = []
         if gaiNian:
             words = gaiNian.split(';')

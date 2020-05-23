@@ -1,3 +1,9 @@
+# coding=utf-8
+'''
+@Date: 2020-01-16 22:55:08
+@LastEditTime: 2020-05-07 17:53:29
+@Author: yuchonghuang@sina.cn
+'''
 '''
 Created on May 6, 2019
 
@@ -53,7 +59,7 @@ if __name__ == '__main__':
      MergeStockLastNAuto(300)
      mergeTime = time.time()
      WARNING_LOG(("mergeTime:%s"%(mergeTime - ConverToXMLTime)))
-    #MergeFiles()
+    #MergeFiles() 
     #TestMergeFiles() 
      CalcThreshold()
      CalcThresholdTime = time.time()
