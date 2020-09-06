@@ -27,6 +27,8 @@ class CAdvanceFilter_MidDistance(IAdvanceFilterBase):
             day = float(df.iloc[-1][stock_Days])
             if day < 250:
                 return False
+            if df.shape[0] < 30:
+                return False
         except:
             pass
     
@@ -56,6 +58,8 @@ class CAdvanceFilter_MidDistance(IAdvanceFilterBase):
         
         count = 0
         rows = df1.shape[0]
+        if rows<60:
+            return (False,)
         ma60_1 = float(df.iloc[-1][stock_MA60])
         ma60_2 = float(df.iloc[-2][stock_MA60])
         ma60_3 = float(df.iloc[-3][stock_MA60])
