@@ -58,7 +58,9 @@ class CAdvanceFilter_NewHigh(AdvanceFilterCommon):
         ret["0日期"] = df.iloc[-1][stock_Date]
         ret["1股票简称"] = df.iloc[-1][stock_Name]
         ret[self.filterName] = "YES"
-        ret["概念板块"] = df.iloc[-1][stock_GaiNian]
+        gaiNian = df.iloc[-1][stock_GaiNian]
+        ret["概念板块"] = gaiNian
+        ret["概念板块个数"] = len(gaiNian.split(';'))
         key = u'%s_天数' %(self.filterName)
         ret[key] = N
         return (True,ret)

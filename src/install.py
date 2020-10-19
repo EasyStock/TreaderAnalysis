@@ -17,7 +17,9 @@ if __name__ == '__main__':
                 'pip3 install openpyxl',
                 "pip3 install lxml",
                 "pip3 install selenium",
-               )
+                "pip3 install html5lib",
+                "pip3 install BeautifulSoup4",
+                )
     os.chdir(folder)
     for cmd in command:
         ret = os.system(cmd)
